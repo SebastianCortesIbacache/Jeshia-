@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presentación de Proyecto – Jeshia</title>
+<meta name="description" content="Dashboard de presentación para el cliente Jeshia: Identidad, Etiquetas y Propuestas Web.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --surface-hover: #1f1f1f;
+  --text: #ffffff;
+  --text-muted: #a0a0a0;
+  --accent: #c4a775;
+  --accent-light: #e6d3a8;
+  --border: #2a2a2a;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+
+header { padding: 4rem 2rem; text-align: center; border-bottom: 1px solid var(--border); background: var(--surface); position: relative; overflow: hidden; }
+header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% -50%, rgba(196, 167, 117, 0.15), transparent 70%); }
+.header-logo { width: 180px; margin-bottom: 2rem; position: relative; z-index: 1; filter: invert(1) drop-shadow(0 0 20px rgba(196, 167, 117, 0.3)); }
+header h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 400; margin-bottom: 1rem; position: relative; z-index: 1; }
+header p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.6; position: relative; z-index: 1; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; flex-grow: 1; }
+.section-title { font-family: 'Inter', sans-serif; font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
+.section-title::after { content: ''; flex-grow: 1; height: 1px; background: var(--border); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
+
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; text-decoration: none; color: inherit; display: flex; flex-direction: column;
+}
+.card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.card-img { height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+.card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, var(--surface) 0%, transparent 100%); opacity: 0.5; }
+.card-img img { max-width: 80%; max-height: 80%; object-fit: contain; position: relative; z-index: 1; transition: transform 0.5s ease; }
+.card:hover .card-img img { transform: scale(1.05); }
+
+.card-icon { font-size: 3rem; color: var(--accent); position: relative; z-index: 1; transition: transform 0.5s ease; }
+.card:hover .card-icon { transform: scale(1.1); }
+
+.card-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
+.card-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.5rem; font-weight: 600; }
+.card-content h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1rem; font-weight: 600; color: var(--text); }
+.card-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1; }
+.card-action { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 500; color: var(--accent-light); text-transform: uppercase; letter-spacing: 0.1em; transition: gap 0.3s ease; }
+.card:hover .card-action { gap: 1rem; color: var(--accent); }
+
+footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem; }
+
+/* ANIMATIONS */
+.fade-in { animation: fadeIn 0.8s ease forwards; opacity: 0; transform: translateY(20px); }
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <img src="assets/logos/Original_Transparent.png" alt="Jeshia Logo" class="header-logo fade-in">
+  <h1 class="fade-in delay-1">Presentación de Entregables</h1>
+  <p class="fade-in delay-2">Centro de revisión para la identidad visual, diseño de empaques (etiquetas) y propuestas de experiencia web para la marca Jeshia.</p>
+</header>
+
+<div class="container">
+  
+  <h2 class="section-title fade-in delay-3">1. Branding & Empaques</h2>
+  <div class="grid fade-in delay-4">
+    <!-- Manual Logo -->
+    <a href="etiquetas/manual_logo.html" target="_blank" class="card">
+      <div class="card-img">
+        <img src="assets/logos/Original_Transparent.png" alt="Logo">
+      </div>
+      <div class="card-content">
+        <span class="card-tag">Identidad Visual</span>
+        <h3>Manual del Logo</h3>
+        <p>Documento interactivo con los lineamientos, paletas de colores y reglas de uso del logotipo Original de Jeshia.</p>
+        <div class="card-action">Ver Manual <span>→</span></div>
+      </div>
+    </a>
+    
+    <!-- Etiquetas -->
+    <a href="etiquetas/index.html" target="_blank" class="card">
+      <div class="card-img">
+        <img src="MontageV1.png" alt="Etiquetas">
+      </div>
+      <div class="card-content">
+        <span class="card-tag">Diseño de Empaque</span>
+        <h3>Propuestas de Etiquetas</h3>
+        <p>Montajes realistas (mockups) de las etiquetas para los productos de Home Spray y Mikado, listos para producción.</p>
+        <div class="card-action">Ver Etiquetas <span>→</span></div>
+      </div>
+    </a>
+  </div>
+
+  <h2 class="section-title fade-in delay-4">2. Experiencia Web (E-commerce)</h2>
+  <div class="grid fade-in delay-4">
+    <!-- Propuesta A -->
+    <a href="propuesta-a/index.html" target="_blank" class="card">
+      <div class="card-img" style="background: #f9f6f0;">
+        <span class="card-icon" style="color: #2c4a30;">🌿</span>
+      </div>
+      <div class="card-content">
+        <span class="card-tag">Propuesta A</span>
+        <h3>Botanica Luxury</h3>
+        <p>Un diseño luminoso y orgánico. Utiliza tonos crema, verde bosque y acentos cobre. Transmite naturalidad, pureza y frescura.</p>
+        <div class="card-action">Ver Propuesta A <span>→</span></div>
+      </div>
+    </a>
+
+    <!-- Propuesta B -->
+    <a href="propuesta-b/index.html" target="_blank" class="card">
+      <div class="card-img" style="background: #050605;">
+        <span class="card-icon" style="color: #d4af37;">🖤</span>
+      </div>
+      <div class="card-content">
+        <span class="card-tag">Propuesta B</span>
+        <h3>Dark Luxury</h3>
+        <p>Elegancia absoluta y misterio. Diseño editorial en modo oscuro con acentos dorados y efectos 3D, ideal para "Haute Parfumerie".</p>
+        <div class="card-action">Ver Propuesta B <span>→</span></div>
+      </div>
+    </a>
+
+    <!-- Propuesta C -->
+    <a href="propuesta-c/index.html" target="_blank" class="card">
+      <div class="card-img" style="background: #ffffff;">
+        <span class="card-icon" style="color: #1a1a1a;">⚪</span>
+      </div>
+      <div class="card-content">
+        <span class="card-tag">Propuesta C</span>
+        <h3>Minimalista Moderno</h3>
+        <p>Estética clínica y de laboratorio botánico (estilo Aesop). Fondo prístino, tipografía robusta y un layout asimétrico de gran impacto.</p>
+        <div class="card-action">Ver Propuesta C <span>→</span></div>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Jeshia. Dashboard confidencial para revisión del cliente.</p>
+</footer>
+
+</body>
+</html>
