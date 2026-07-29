@@ -247,7 +247,8 @@
 
     <div>
       <a href="manual_logo.html" class="btn-nav-manual">📖 Manual del Logo</a>
-      <button class="btn-nav-manual" style="background: var(--accent-copper); color: white;" onclick="window.print()">🖨️ Imprimir</button>
+      <a href="../etiquetas_impresion/index.html" class="btn-nav-manual" style="background: var(--accent-copper); color: white;">📁 Descargar PNG Impresión (HD)</a>
+      <button class="btn-nav-manual" onclick="window.print()">🖨️ Imprimir</button>
     </div>
   </header>
 
@@ -287,6 +288,14 @@
 
   <!-- MAIN -->
   <main>
+    <!-- PROPUESTA COMPLETA Y PRODUCCIÓN MASIVA -->
+    <div style="background:#FAF8F5; border:2px solid #C2825C; border-radius:10px; padding:1.5rem; margin-bottom:2rem; text-align:center;">
+      <span style="color:#C2825C; font-weight:700; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase;">🎉 COLECCIÓN DE IMPRESIÓN COMPLETA (78 ETIQUETAS HD)</span>
+      <h2 style="font-family:'Cormorant Garamond', serif; font-size:2rem; font-weight:700; color:#23201B; margin:0.5rem 0;">Adornos Ornamentales e Ilustraciones Botánicas</h2>
+      <p style="color:#666; font-size:0.95rem; max-width:750px; margin:0 auto 1.2rem auto; line-height:1.5;">Las 78 etiquetas para Mikado, Home Spray, Recargas (250/500), Crema y Aromatizador han sido generadas en alta resolución (300+ DPI) con el nuevo diseño de divisores e ilustraciones botánicas.</p>
+      <img src="../preview_diseno_nuevo.png" alt="Preview Nuevo Diseño" style="max-width:100%; border-radius:6px; box-shadow:0 10px 25px rgba(0,0,0,0.1); cursor:pointer;" onclick="openModal('../preview_diseno_nuevo.png', 'Colección de Etiquetas Jeshia')">
+    </div>
+
     <div class="section-banner" id="sectionBanner">
       <div>
         <h2 id="bannerTitle">Galería Oficial de Montajes Jeshia</h2>
@@ -320,59 +329,49 @@
       "manzana-canela": { name: "Manzana Canela", sub: "Manzana Asada & Canela", notes: "Manzana horneada y canela especiada." },
       "coco-flower": { name: "Coco Flower", sub: "Flor de Coco & Jazmín", notes: "Flor de coco y pétalos de jazmín blanco." },
       "mokka": { name: "Mokka", sub: "Café Moka & Cacao Tostado", notes: "Grano de café espresso y cacao artesanal." },
-      "limon": { name: "Limón", sub: "Limón Verde & Hierba Luisa", notes: "Limón recién cortado y hierba luisa." },
+      "limon": { name: "Limón", sub: "Limón Verde", notes: "Limón recién cortado y hierba luisa." },
       "pino": { name: "Pino", sub: "Pino Silvestre & Bosque", notes: "Agujas de pino, madera de cedro y aire puro." },
-      "lavanda": { name: "Lavanda", sub: "Lavanda Francesa & Manzanilla", notes: "Lavanda silvestre y flor de manzanilla." },
-      "frutal-mango": { name: "Frutal Mango", sub: "Mango Tropical & Maracuyá", notes: "Néctar de mango maduro y maracuyá." },
+      "lavanda": { name: "Lavanda", sub: "Lavanda Francesa", notes: "Lavanda silvestre y flor de manzanilla." },
+      "frutal-mango": { name: "Frutal Mango", sub: "Mango Tropical", notes: "Néctar de mango maduro y maracuyá." },
       "vainilla-coco": { name: "Vainilla Coco", sub: "Vainilla Bourbon & Coco", notes: "Vainilla Bourbon natural y crema de coco." }
     };
 
     // EXACT USER PROVIDED MONTAJE IMAGE PATHS
     const envasesSpecs = {
       "mikado": {
-        name: "Mikado",
+        name: "Mikado 50 ml",
         dim: "50 x 25 mm",
         montageImg: "../assets/envases/Mikado/Mikado Montaje.png",
         thumbImg: "../assets/envases/thumbs/mikado_montaje.jpg",
-        flatThumb: "../assets/envases/Mikado/Mikado Original.png",
-        category: "DIFUSOR DE VARILLAS",
-        volume: "200 ml"
+        flatThumb: "../assets/envases/Mikado/Mikado Original.png"
       },
       "spray": {
         name: "Home Spray",
         dim: "60 x 75 mm",
         montageImg: "../assets/envases/Home Spray/Home Spray Montaje.png",
         thumbImg: "../assets/envases/thumbs/homespray_montaje.jpg",
-        flatThumb: "../assets/envases/Home Spray/Home Spray Original.png",
-        category: "SPRAY DE AMBIENTE",
-        volume: "250 ml"
+        flatThumb: "../assets/envases/Home Spray/Home Spray Original.png"
       },
       "aromatizador": {
         name: "Aromatizador",
-        dim: "15 x 20 mm (Circular)",
+        dim: "Forma Redonda / Ovalada",
         montageImg: "../assets/envases/Aromatizador/Aromatizador Montaje.png",
         thumbImg: "../assets/envases/thumbs/aromatizador_montaje.jpg",
-        flatThumb: "../assets/envases/Aromatizador/Back.png",
-        category: "AMBIENTADOR",
-        volume: "15 ml"
+        flatThumb: "../assets/envases/Aromatizador/Back.png"
       },
       "recarga250": {
         name: "Recarga 250 ml",
-        dim: "60 x 100 mm",
+        dim: "60 x 75 mm",
         montageImg: "../assets/envases/Recargas/Recarga 250 Montaje.png",
         thumbImg: "../assets/envases/thumbs/recarga250_montaje.jpg",
-        flatThumb: "../assets/envases/Recargas/Recarga 250.png",
-        category: "RECARGA ECO 250ML",
-        volume: "250 ml"
+        flatThumb: "../assets/envases/Recargas/Recarga 250.png"
       },
       "recarga500": {
         name: "Recarga 500 ml",
-        dim: "75 x 130 mm",
+        dim: "60 x 100 mm",
         montageImg: "../assets/envases/Recargas/Recarga 500 Montaje.png",
         thumbImg: "../assets/envases/thumbs/recarga500_montaje.jpg",
-        flatThumb: "../assets/envases/Recargas/Recarga 500.png",
-        category: "RECARGA FAMILIAR 500ML",
-        volume: "500 ml"
+        flatThumb: "../assets/envases/Recargas/Recarga 500.png"
       }
     };
 
@@ -407,9 +406,9 @@
       }
     }
 
-    // PURE CLEAN MONTAGE CARD: NO OVERLAID HTML BADGES AT ALL!
     function createCleanMontageCard(envaseKey) {
       const card = document.createElement('div');
+      card.className = 'card-label-item';
       card.className = 'montage-card';
       const spec = envasesSpecs[envaseKey];
 
@@ -437,32 +436,26 @@
       card.className = 'label-card';
       const spec = envasesSpecs[envaseKey];
 
-      const isMikado = envaseKey === 'mikado';
       const isAromatizador = envaseKey === 'aromatizador';
+      const isMikado = envaseKey === 'mikado';
       const isSpray = envaseKey === 'spray';
+
+      let catText = "HOME & AROMAS";
+      if (envaseKey === 'mikado') catText = "MIKADO • 50 ML";
+      else if (envaseKey === 'spray') catText = "HOME SPRAY • 250 ML";
+      else if (envaseKey === 'recarga250') catText = "RECARGA ECO • 250 ML";
+      else if (envaseKey === 'recarga500') catText = "RECARGA FAMILIAR • 500 ML";
+      else if (envaseKey === 'aromatizador') catText = "AMBIENTADOR • 15 ML";
 
       let notesContent = '';
       let footerContent = '';
 
-      if (isAromatizador) {
-        notesContent = ''; footerContent = '';
-      } else if (isMikado) {
-        notesContent = ''; footerContent = '';
-      } else if (isSpray) {
+      if (envaseKey === 'spray') {
         notesContent = `<div class="notes-box">${aroma.notes}</div>`;
-        footerContent = `
-          <div class="label-contact-footer">
-            <div><strong>WhatsApp:</strong> +569 31141134 | <strong>TikTok:</strong> @jeshiacybn</div>
-          </div>
-        `;
-      } else {
-        notesContent = `<div class="notes-box">${aroma.notes}<br><em>Fórmula concentrada eco-amigable.</em></div>`;
-        footerContent = `
-          <div class="label-contact-footer">
-            <div><strong>WhatsApp:</strong> +569 31141134 | +569 3362 0641</div>
-            <div><strong>TikTok:</strong> @jeshiacybn • Contenido: ${spec.volume}</div>
-          </div>
-        `;
+        footerContent = `<div class="label-contact-footer">WhatsApp: +569 31141134 | TikTok: @jeshiacybn</div>`;
+      } else if (envaseKey === 'recarga250' || envaseKey === 'recarga500') {
+        notesContent = `<div class="notes-box">${aroma.notes}</div>`;
+        footerContent = `<div class="label-contact-footer">WhatsApp: +569 31141134 | TikTok: @jeshiacybn</div>`;
       }
 
       card.innerHTML = `
@@ -474,18 +467,19 @@
         <div class="card-display-body">
           <div class="container-photo-box">
             <img src="${spec.flatThumb}" alt="Envase Real ${spec.name}" class="container-photo-img">
-            <span class="container-photo-label">ENVASE EXACTO</span>
+            <span class="container-photo-label" style="font-size:0.6rem; color:var(--text-muted); margin-top:0.4rem; font-weight:600;">ENVASE REAL</span>
           </div>
 
-          <div class="etiqueta-wrap envase-${envaseKey}">
+          <div class="etiqueta-wrap envase-${envaseKey}" style="${isAromatizador ? 'border-radius:50%; width:190px; height:190px; padding:1rem;' : (isMikado ? 'width:240px; height:130px; padding:0.8rem;' : 'width:210px; height:340px; padding:1.4rem 1rem;')} display:flex; flex-direction:column; align-items:center; justify-content:space-between; text-align:center;">
             <div style="width:100%; display:flex; flex-direction:column; align-items:center;">
-              <img src="../assets/logos/Original_Transparent.png" alt="Logo Jeshia" class="logo-hero-img">
-              <div class="brand-subhead">HOME & AROMAS</div>
+              <img src="../assets/logos/Original_Transparent.png" alt="Logo Jeshia" class="logo-hero-img" style="${isMikado ? 'max-height:45px;' : (isAromatizador ? 'max-height:65px;' : 'max-height:85px;')} max-width:90%; object-fit:contain;">
+              <div class="brand-subhead" style="font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:#8c8273; margin-top:2px;">HOME & AROMAS</div>
             </div>
 
             <div style="width:100%;">
-              <span class="aroma-cat">${spec.category}</span>
-              <h3 class="aroma-title">${aroma.name}</h3>
+              <span class="aroma-cat" style="font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent-copper); font-weight:700; display:block; margin-bottom:2px;">${catText}</span>
+              <h3 class="aroma-title" style="font-family:'Cormorant Garamond', serif; font-size:${isMikado ? '1.1rem' : (isAromatizador ? '1.15rem' : '1.45rem')}; font-weight:700; text-transform:uppercase; color:#23201B; letter-spacing:0.05em; line-height:1;">${aroma.name}</h3>
+              <div style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:0.75rem; color:#555046; margin-top:2px;">${aroma.sub || ''}</div>
               ${notesContent}
             </div>
 

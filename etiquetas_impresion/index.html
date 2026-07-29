@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeshia – Centro de Etiquetas Listas para Impresión HD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF8F5;
+      --panel: #ffffff;
+      --text: #23201B;
+      --muted: #78736a;
+      --copper: #c2825c;
+      --gold: #c5a059;
+      --border: #e2ded4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .brand-group { display: flex; align-items: center; gap: 1.2rem; }
+    .brand-logo { height: 48px; object-fit: contain; }
+    .brand-group h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .brand-group span {
+      font-size: 0.75rem;
+      color: var(--copper);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      display: block;
+    }
+    .header-actions { display: flex; gap: 1rem; align-items: center; }
+    .btn {
+      background: var(--copper);
+      color: white;
+      text-decoration: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 25px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn:hover { background: #ab6f4b; }
+    .btn-secondary {
+      background: #f0ebe1;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: #e5ded2; }
+
+    .controls-bar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .filter-group { display: flex; align-items: center; gap: 0.8rem; }
+    .filter-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    select {
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: white;
+      font-family: inherit;
+      font-size: 0.85rem;
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1750px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 2.5rem 3rem;
+    }
+
+    .banner {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .banner h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; }
+    .banner p { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+
+    .grid-labels {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2.2rem;
+    }
+
+    .card-label-item {
+      background: white;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.02);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card-label-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.07);
+    }
+
+    .img-box {
+      width: 100%;
+      height: 380px;
+      background: #FAF8F5;
+      border-radius: 12px;
+      border: 1px solid #EBE6DC;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      overflow: hidden;
+    }
+    .img-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.06));
+    }
+
+    .card-info {
+      width: 100%;
+      margin-top: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+    .card-info p {
+      font-size: 0.75rem;
+      color: var(--copper);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-actions {
+      width: 100%;
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.8rem;
+    }
+    .btn-card {
+      flex: 1;
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.78rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-card-primary { background: var(--copper); color: white; }
+    .btn-card-primary:hover { background: #ab6f4b; }
+    .btn-card-secondary { background: #f4f0e8; color: var(--text); }
+    .btn-card-secondary:hover { background: #e8e2d5; }
+
+    /* MODAL */
+    .modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+      z-index: 1000; display: none; align-items: center; justify-content: center; padding: 2rem;
+    }
+    .modal-box {
+      max-width: 90vw; max-height: 90vh; background: white; border-radius: 20px;
+      overflow: hidden; display: flex; flex-direction: column; position: relative; padding: 1.5rem;
+    }
+    .modal-box img { max-width: 80vw; max-height: 75vh; object-fit: contain; background: #FAF8F5; border-radius: 10px; }
+    .close-modal {
+      position: absolute; top: 15px; right: 20px; background: rgba(0,0,0,0.6); color: white;
+      border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; cursor: pointer;
+    }
+
+    @media print {
+      header, .controls-bar, .banner, .card-actions { display: none !important; }
+      body { background: white; }
+      .grid-labels { display: block; }
+      .card-label-item { break-inside: avoid; page-break-inside: avoid; border: none; box-shadow: none; margin-bottom: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-group">
+      <img src="../assets/logos/Original_Transparent.png" alt="Jeshia Logo" class="brand-logo">
+      <div>
+        <h1>JESHIA</h1>
+        <span>Centro de Impresión de Etiquetas HD (Vista Completa de Textos para Revisión)</span>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <a href="../etiquetas/index.html" class="btn btn-secondary">← Volver a Montajes & Suite</a>
+      <button class="btn" onclick="window.print()">🖨️ Imprimir Hoja de Etiquetas</button>
+    </div>
+  </header>
+
+  <div class="controls-bar">
+    <div class="filter-group">
+      <span class="filter-label">FILTRAR LÍNEA DE PRODUCTO:</span>
+      <select id="productFilter" onchange="renderGrid()">
+        <option value="all">Todas las Líneas (78 Etiquetas Generadas)</option>
+        <option value="01_Mikado_50x25mm">Mikado 50 ml (50 x 25 mm)</option>
+        <option value="02_Home_Spray_60x75mm">Home Spray (60 x 75 mm)</option>
+        <option value="04_Recarga_250ml_60x75mm">Recarga 250 ml (60 x 75 mm)</option>
+        <option value="05_Recarga_500ml_60x100mm">Recarga 500 ml (60 x 100 mm)</option>
+        <option value="06_Crema_60x40mm">Crema (60 x 40 mm)</option>
+        <option value="03_Aromatizador_Redonda_Ovalada">Aromatizador (Forma Redonda / Ovalada)</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <span class="filter-label">FILTRAR AROMA:</span>
+      <select id="aromaFilter" onchange="renderGrid()">
+        <option value="all">Todos los Aromas (13 Fragancias)</option>
+        <option value="vainilla_coco">Vainilla Coco</option>
+        <option value="citric">Citric</option>
+        <option value="berries">Berries</option>
+        <option value="coco_nut">Coco Nut</option>
+        <option value="sugar">Sugar</option>
+        <option value="chicle">Chicle</option>
+        <option value="manzana_canela">Manzana Canela</option>
+        <option value="coco_flower">Coco Flower</option>
+        <option value="mokka">Mokka</option>
+        <option value="limon">Limón</option>
+        <option value="pino">Pino</option>
+        <option value="lavanda">Lavanda</option>
+        <option value="frutal_mango">Frutal Mango</option>
+      </select>
+    </div>
+  </div>
+
+  <main>
+    <div class="banner">
+      <div>
+        <h2>Revisión de Textos & Formatos Manteniendo Nuevas Dimensiones</h2>
+        <p>Logotipo Jeshia con alto protagonismo visual y restauración de textos anteriores (categoría, subtítulos, notas olfativas y pie de contacto) para decidir qué conservar y qué eliminar.</p>
+      </div>
+    </div>
+
+    <div class="grid-labels" id="labelsGrid"></div>
+  </main>
+
+  <div class="modal" id="modal" onclick="closeModal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="close-modal" onclick="closeModal()">✕</button>
+      <img src="" id="modalImg" alt="Etiqueta Ampliada">
+    </div>
+  </div>
+
+  <script>
+    const products = {
+      "01_Mikado_50x25mm": { name: "Mikado 50 ml", dim: "50 x 25 mm", prefix: "Mikado" },
+      "02_Home_Spray_60x75mm": { name: "Home Spray", dim: "60 x 75 mm", prefix: "Home_Spray" },
+      "04_Recarga_250ml_60x75mm": { name: "Recarga 250 ml", dim: "60 x 75 mm", prefix: "Recarga_250ml" },
+      "05_Recarga_500ml_60x100mm": { name: "Recarga 500 ml", dim: "60 x 100 mm", prefix: "Recarga_500ml" },
+      "06_Crema_60x40mm": { name: "Crema", dim: "60 x 40 mm", prefix: "Crema" },
+      "03_Aromatizador_Redonda_Ovalada": { name: "Aromatizador", dim: "Forma Redonda / Ovalada", prefix: "Aromatizador" }
+    };
+
+    const aromas = [
+      { key: "vainilla_coco", name: "Vainilla Coco" },
+      { key: "citric", name: "Citric" },
+      { key: "berries", name: "Berries" },
+      { key: "coco_nut", name: "Coco Nut" },
+      { key: "sugar", name: "Sugar" },
+      { key: "chicle", name: "Chicle" },
+      { key: "manzana_canela", name: "Manzana Canela" },
+      { key: "coco_flower", name: "Coco Flower" },
+      { key: "mokka", name: "Mokka" },
+      { key: "limon", name: "Limón" },
+      { key: "pino", name: "Pino" },
+      { key: "lavanda", name: "Lavanda" },
+      { key: "frutal_mango", name: "Frutal Mango" }
+    ];
+
+    function renderGrid() {
+      const pFilter = document.getElementById('productFilter').value;
+      const aFilter = document.getElementById('aromaFilter').value;
+      const grid = document.getElementById('labelsGrid');
+      grid.innerHTML = '';
+
+      const pKeys = pFilter === 'all' ? Object.keys(products) : [pFilter];
+      const aList = aFilter === 'all' ? aromas : aromas.filter(a => a.key === aFilter);
+
+      pKeys.forEach(pFolder => {
+        const prod = products[pFolder];
+        aList.forEach(aroma => {
+          const imgPath = `${pFolder}/${prod.prefix}_${aroma.key}.png`;
+          const card = document.createElement('div');
+          card.className = 'card-label-item';
+          card.innerHTML = `
+            <div class="img-box">
+              <img src="${imgPath}" alt="${prod.name} ${aroma.name}">
+            </div>
+            <div class="card-info">
+              <div>
+                <h3>${aroma.name}</h3>
+                <p>${prod.name} • ${prod.dim}</p>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="btn-card btn-card-secondary" onclick="openModal('${imgPath}')">🔍 Ampliar</button>
+              <a href="${imgPath}" download="${prod.prefix}_${aroma.key}.png" class="btn-card btn-card-primary">⬇ Descargar HD</a>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      });
+    }
+
+    function openModal(src) {
+      document.getElementById('modalImg').src = src;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    window.addEventListener('DOMContentLoaded', renderGrid);
+  </script>
+</body>
+</html>
