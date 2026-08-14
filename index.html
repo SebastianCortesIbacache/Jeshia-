@@ -1,182 +1,781 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Presentación de Proyecto – Jeshia</title>
-<meta name="description" content="Dashboard de presentación para el cliente Jeshia: Identidad, Etiquetas y Propuestas Web.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #0a0a0a;
-  --surface: #141414;
-  --surface-hover: #1f1f1f;
-  --text: #ffffff;
-  --text-muted: #a0a0a0;
-  --accent: #c4a775;
-  --accent-light: #e6d3a8;
-  --border: #2a2a2a;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeshia — Aromas Botánicos, Home Sprays & Difusores Mikado</title>
+  <meta name="description" content="Perfumecería botánica y aromatización artesanal para el hogar. Home sprays en vidrio ámbar, difusores mikado, aromatizadores y recargas ecológicas en 13 fragancias exclusivas.">
+  
+  <!-- Preconnect & Tipografías Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logos/Jeshia Colores_Transparent.png">
 
-header { padding: 4rem 2rem; text-align: center; border-bottom: 1px solid var(--border); background: var(--surface); position: relative; overflow: hidden; }
-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% -50%, rgba(196, 167, 117, 0.15), transparent 70%); }
-.header-logo { width: 180px; margin-bottom: 2rem; position: relative; z-index: 1; filter: invert(1) drop-shadow(0 0 20px rgba(196, 167, 117, 0.3)); }
-header h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 400; margin-bottom: 1rem; position: relative; z-index: 1; }
-header p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.6; position: relative; z-index: 1; }
-
-.container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; flex-grow: 1; }
-.section-title { font-family: 'Inter', sans-serif; font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
-.section-title::after { content: ''; flex-grow: 1; height: 1px; background: var(--border); }
-
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
-
-.card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; text-decoration: none; color: inherit; display: flex; flex-direction: column;
-}
-.card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.card-img { height: 220px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); padding: 1rem; }
-.card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, var(--surface) 0%, transparent 100%); opacity: 0.5; }
-.card-img img { max-width: 85%; max-height: 85%; object-fit: contain; position: relative; z-index: 1; transition: transform 0.5s ease; }
-.card:hover .card-img img { transform: scale(1.05); }
-
-.card-icon { font-size: 3rem; color: var(--accent); position: relative; z-index: 1; transition: transform 0.5s ease; }
-.card:hover .card-icon { transform: scale(1.1); }
-
-.card-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
-.card-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.5rem; font-weight: 600; }
-.card-content h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1rem; font-weight: 600; color: var(--text); }
-.card-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1; }
-.card-action { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 500; color: var(--accent-light); text-transform: uppercase; letter-spacing: 0.1em; transition: gap 0.3s ease; }
-.card:hover .card-action { gap: 1rem; color: var(--accent); }
-
-footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem; }
-
-/* ANIMATIONS */
-.fade-in { animation: fadeIn 0.8s ease forwards; opacity: 0; transform: translateY(20px); }
-@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-
-</style>
+  <!-- Estilos Maestros -->
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-<header>
-  <img src="assets/logos/Original_Transparent.png" alt="Jeshia Logo" class="header-logo fade-in">
-  <h1 class="fade-in delay-1">Presentación de Entregables</h1>
-  <p class="fade-in delay-2">Centro de revisión para la identidad visual, diseño de empaques (etiquetas) y propuestas de experiencia web para la marca Jeshia.</p>
-</header>
-
-<div class="container">
-  
-  <h2 class="section-title fade-in delay-3">1. Branding & Empaques</h2>
-  <div class="grid fade-in delay-4">
-    <!-- Nueva Propuesta de Diseño en Revisión -->
-    <a href="preview_diseno_nuevo.png" target="_blank" class="card" style="border-color: var(--accent);">
-      <div class="card-img" style="background: #FAF8F5;">
-        <img src="preview_diseno_nuevo.png" alt="Nueva Propuesta de Diseño" style="max-width: 95%; max-height: 95%;">
-      </div>
-      <div class="card-content">
-        <span class="card-tag">✨ Nueva Propuesta en Revisión</span>
-        <h3>Etiquetas con Adornos e Ilustraciones</h3>
-        <p>Previsualización de los modelos para Mikado (50 ml) y Home Spray (250 ml) con divisores ornamentales superiores/centrales e ilustraciones botánicas en tinta cobriza.</p>
-        <div class="card-action">Ver Previsualización HD <span>→</span></div>
-      </div>
-    </a>
-
-    <!-- Manual Logo -->
-    <a href="etiquetas/manual_logo.html" target="_blank" class="card">
-      <div class="card-img">
-        <img src="assets/logos/Original_Transparent.png" alt="Logo">
-      </div>
-      <div class="card-content">
-        <span class="card-tag">Identidad Visual</span>
-        <h3>Manual del Logo</h3>
-        <p>Documento interactivo con los lineamientos, paletas de colores y reglas de uso del logotipo Original de Jeshia.</p>
-        <div class="card-action">Ver Manual <span>→</span></div>
-      </div>
-    </a>
-    
-    <!-- Etiquetas -->
-    <a href="etiquetas/index.html" target="_blank" class="card">
-      <div class="card-img">
-        <img src="assets/envases/Home Spray/Home Spray Montaje.png" alt="Etiquetas">
-      </div>
-      <div class="card-content">
-        <span class="card-tag">Diseño de Empaque</span>
-        <h3>Propuestas de Etiquetas & Montajes</h3>
-        <p>Montajes realistas e interactivos de las etiquetas para Crema, Home Spray, Mikado, Aromatizador y Recargas.</p>
-        <div class="card-action">Ver Suite <span>→</span></div>
-      </div>
-    </a>
-
-    <!-- Impresión HD -->
-    <a href="etiquetas_impresion/index.html" target="_blank" class="card">
-      <div class="card-img" style="background: #FAF8F5;">
-        <span class="card-icon" style="color: var(--accent);">🖨️</span>
-      </div>
-      <div class="card-content">
-        <span class="card-tag">Archivos de Imprenta</span>
-        <h3>Etiquetas HD en Imagen (PNG)</h3>
-        <p>Galería completa con 78 etiquetas individuales exportadas en ultra alta resolución (300+ DPI) listas para descargar e imprimir.</p>
-        <div class="card-action">Ver Etiquetas HD <span>→</span></div>
-      </div>
-    </a>
+  <!-- Barra Superior de Anuncios -->
+  <div class="top-bar">
+    <span>🌿 Envíos a todo Chile</span>
+    <span>✦</span>
+    <span>Envases de vidrio ámbar reutilizables y recargas eco-friendly</span>
+    <span>✦</span>
+    <span>Compra directa y asesoría personalizada por WhatsApp</span>
   </div>
 
-  <h2 class="section-title fade-in delay-4">2. Experiencia Web (E-commerce)</h2>
-  <div class="grid fade-in delay-4">
-    <!-- Propuesta A -->
-    <a href="propuesta-a/index.html" target="_blank" class="card">
-      <div class="card-img" style="background: #f9f6f0;">
-        <span class="card-icon" style="color: #2c4a30;">🌿</span>
-      </div>
-      <div class="card-content">
-        <span class="card-tag">Propuesta A</span>
-        <h3>Botanica Luxury</h3>
-        <p>Un diseño luminoso y orgánico. Utiliza tonos crema, verde bosque y acentos cobre. Transmite naturalidad, pureza y frescura.</p>
-        <div class="card-action">Ver Propuesta A <span>→</span></div>
-      </div>
-    </a>
+  <!-- Header Sticky con Glassmorphism -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#" class="logo-link" title="Jeshia Inicio">
+        <img src="assets/logos/Jeshia Colores_Transparent.png" alt="Jeshia Logo Oficial" class="logo-img">
+      </a>
 
-    <!-- Propuesta B -->
-    <a href="propuesta-b/index.html" target="_blank" class="card">
-      <div class="card-img" style="background: #050605;">
-        <span class="card-icon" style="color: #d4af37;">🖤</span>
-      </div>
-      <div class="card-content">
-        <span class="card-tag">Propuesta B</span>
-        <h3>Dark Luxury</h3>
-        <p>Elegancia absoluta y misterio. Diseño editorial en modo oscuro con acentos dorados y efectos 3D, ideal para "Haute Parfumerie".</p>
-        <div class="card-action">Ver Propuesta B <span>→</span></div>
-      </div>
-    </a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#coleccion" class="nav-link">Colección</a></li>
+          <li><a href="#aromas" class="nav-link">13 Aromas</a></li>
+          <li><a href="#set-builder" class="nav-link">Arma tu Set</a></li>
+          <li><a href="#aromaterapia" class="nav-link">Aromaterapia</a></li>
+          <li><a href="#ambientes" class="nav-link">Guía de Espacios</a></li>
+          <li><a href="#b2b" class="nav-link">Empresas & Mayoristas</a></li>
+        </ul>
+      </nav>
 
-    <!-- Propuesta C -->
-    <a href="propuesta-c/index.html" target="_blank" class="card">
-      <div class="card-img" style="background: #ffffff;">
-        <span class="card-icon" style="color: #1a1a1a;">⚪</span>
+      <div class="nav-actions">
+        <!-- Selector de Modo Noche / Día -->
+        <button class="icon-btn theme-toggle-btn" id="themeToggleBtn" title="Cambiar Tema (Día/Noche)">
+          🌙
+        </button>
+
+        <button class="icon-btn cart-btn" id="cartOpenBtn" title="Ver Carrito de Compras">
+          <span>🛒</span>
+          <span>Carrito</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+
+        <button class="icon-btn mobile-menu-btn" title="Menú">
+          ☰
+        </button>
       </div>
-      <div class="card-content">
-        <span class="card-tag">Propuesta C</span>
-        <h3>Minimalista Moderno</h3>
-        <p>Estética clínica y de laboratorio botánico (estilo Aesop). Fondo prístino, tipografía robusta y un layout asimétrico de gran impacto.</p>
-        <div class="card-action">Ver Propuesta C <span>→</span></div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>✨</span> Nueva Colección Botánica 2026
+        </div>
+        <h1 class="hero-title">
+          Aromas que transforman tu espacio en un <em>santuario</em>.
+        </h1>
+        <p class="hero-text">
+          Formulaciones botánicas puras, home sprays de alta fijación, difusores mikado continuos y recargas eco-friendly. Creados artesanalmente para despertar tus sentidos con serenidad y sofisticación.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#coleccion" class="btn-primary">
+            <span>🛒</span> Explorar Colección
+          </a>
+          <a href="#set-builder" class="btn-outline">
+            <span>🎁</span> Armar Set de Regalo
+          </a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="trust-item">
+            <span class="trust-icon">🌱</span>
+            <span>100% Libre de Crueldad</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">🧪</span>
+            <span>Esencias de Alta Fijación</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">♻️</span>
+            <span>Vidrio Ámbar Reutilizable</span>
+          </div>
+        </div>
       </div>
-    </a>
+
+      <div class="hero-visual">
+        <div class="hero-card-frame">
+          <div class="hero-img-wrap">
+            <img src="visuales/Home Spray - Mokka Visual.png" alt="Home Spray Mokka Jeshia" class="hero-main-img">
+          </div>
+
+          <div class="floating-pill pill-1">
+            <span>☕</span>
+            <div>
+              <b>Mokka 250 ML</b><br>
+              <small style="color: var(--brand-terracotta);">Café & Cacao Tostado</small>
+            </div>
+          </div>
+
+          <div class="floating-pill pill-2">
+            <span>🌿</span>
+            <div>
+              <b>13 Fragancias</b><br>
+              <small style="color: var(--brand-forest);">Para cada momento</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       AROMA TICKER
+       ========================================================================== -->
+  <div class="aroma-ticker">
+    <div class="ticker-track" id="tickerTrack">
+      <!-- Generado dinámicamente con las 13 fragancias -->
+    </div>
   </div>
 
-</div>
+  <!-- ==========================================================================
+       CATÁLOGO DE PRODUCTOS (TIENDA INTERACTIVA)
+       ========================================================================== -->
+  <section class="catalog-section" id="coleccion">
+    <div class="container">
+      <div class="catalog-header">
+        <span class="section-label">Colección Oficial</span>
+        <h2 class="section-heading">Nuestras Líneas de Producto</h2>
+        <p class="section-subheading">
+          Elige tu formato favorito y personalízalo al instante con cualquiera de nuestras 13 fragancias botánicas.
+        </p>
 
-<footer>
-  <p>© 2025 Jeshia. Dashboard confidencial para revisión del cliente.</p>
-</footer>
+        <!-- Filtros por categoría de producto -->
+        <div class="category-tabs">
+          <button class="cat-tab active" data-category="all">Todos los Productos</button>
+          <button class="cat-tab" data-category="home-spray">Home Sprays</button>
+          <button class="cat-tab" data-category="mikado">Difusores Mikado</button>
+          <button class="cat-tab" data-category="aromatizador">Aromatizador 15ml</button>
+          <button class="cat-tab" data-category="recarga">Recargas Eco-Refill</button>
+        </div>
+      </div>
 
+      <!-- Cuadrícula dinámica de productos -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Renderizado por js/main.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       1. CREADOR DE SETS PERSONALIZADOS (MIX & MATCH)
+       ========================================================================== -->
+  <section class="builder-section" id="set-builder">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <span class="section-label">Mix & Match Personalizado</span>
+        <h2 class="section-heading">Arma tu Set de Regalo a Medida</h2>
+        <p class="section-subheading">Combina tus envases y aromas favoritos en una caja botánica con descuento exclusivo.</p>
+      </div>
+
+      <div class="builder-wrap">
+        <div class="builder-steps">
+          <!-- Paso 1: Formato -->
+          <div class="builder-step-card">
+            <h3 class="builder-step-title">
+              <span class="badge-num">1</span> Elige la Configuración de tu Set
+            </h3>
+            <div class="builder-options-grid">
+              <div class="builder-option-btn box-format-btn selected" data-format="duo-ritual">
+                <div class="icon">✨</div>
+                <div class="title">Dúo Ritual</div>
+                <div class="sub">Home Spray + Mikado (-15% OFF)</div>
+              </div>
+              <div class="builder-option-btn box-format-btn" data-format="trio-full">
+                <div class="icon">👑</div>
+                <div class="title">Trío Esencial</div>
+                <div class="sub">Spray + Mikado + Recarga (-20% OFF)</div>
+              </div>
+              <div class="builder-option-btn box-format-btn" data-format="solo-spray">
+                <div class="icon">🎁</div>
+                <div class="title">Solo Spray Regalo</div>
+                <div class="sub">1 Home Spray 250ml en caja</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 2: Selección de Aromas -->
+          <div class="builder-step-card">
+            <h3 class="builder-step-title">
+              <span class="badge-num">2</span> Personaliza tus Fragancias
+            </h3>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div>
+                <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">
+                  Fragancia 1 (Principal):
+                </label>
+                <select id="boxFrag1" class="scent-select">
+                  <!-- Llenado dinámico -->
+                </select>
+              </div>
+              <div>
+                <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">
+                  Fragancia 2 (Secundaria):
+                </label>
+                <select id="boxFrag2" class="scent-select">
+                  <!-- Llenado dinámico -->
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 3: Complemento Extra Opcional -->
+          <div class="builder-step-card">
+            <h3 class="builder-step-title">
+              <span class="badge-num">3</span> ¿Deseas agregar un extra con descuento?
+            </h3>
+            <div>
+              <select id="boxAddon" class="scent-select">
+                <option value="none">Sin extra adicional</option>
+                <option value="mini-auto">+ Aromatizador Compacto Auto 15ml (+$3.500)</option>
+                <option value="eco-250">+ Recarga Eco-Refill 250ml (+$7.500)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel Resumen de la Caja -->
+        <div class="box-summary-panel">
+          <span class="box-discount-badge" id="boxDiscountBadge">15% Descuento Set 🎁</span>
+          <h3 class="font-serif" id="boxSummaryTitle" style="font-size: 1.5rem; color: var(--brand-forest-dark); margin-bottom: 12px;">
+            Dúo Ritual Botánico
+          </h3>
+
+          <div class="box-mockup-wrap">
+            <img src="assets/visuales/Familia.png" alt="Set de Regalo Jeshia">
+          </div>
+
+          <div id="boxSummaryItems" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; border-bottom: 1px solid var(--brand-line); padding-bottom: 16px;">
+            <!-- Renderizado dinámico -->
+          </div>
+
+          <div class="box-price-row">
+            <span class="box-price-original" id="boxOriginalPrice">$20.500</span>
+            <span class="box-price-final" id="boxFinalPrice">$17.400</span>
+          </div>
+
+          <button class="btn-primary" onclick="addCustomBoxToCart()" style="width: 100%; font-size: 0.95rem;">
+            🛒 Añadir Set Personalizado al Carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       2. NEURO-AROMATERAPIA (MOOD SCENT WHEEL)
+       ========================================================================== -->
+  <section class="mood-section" id="aromaterapia">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <span class="section-label" style="color: var(--brand-sand);">Bienestar Emocional</span>
+        <h2 class="section-heading" style="color: #fff;">Neuro-Aromaterapia: Aromas por Estado de Ánimo</h2>
+        <p class="section-subheading" style="color: var(--text-light);">Descubre cómo cada perfil olfativo interactúa con tu sistema límbico para equilibrar tu día.</p>
+      </div>
+
+      <!-- Selector de Moods -->
+      <div class="mood-tabs" id="moodTabsContainer">
+        <!-- Renderizado por js/main.js -->
+      </div>
+
+      <!-- Ficha de Mood Activo -->
+      <div id="moodShowcaseContainer">
+        <!-- Renderizado por js/main.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       UNIVERSO DE 13 FRAGANCIAS
+       ========================================================================== -->
+  <section class="universe-section" id="aromas">
+    <div class="container">
+      <div class="universe-header">
+        <span class="section-label" style="color: var(--brand-sand);">Biblioteca Olfativa</span>
+        <h2 class="section-heading">El Gran Universo de los 13 Aromas</h2>
+        <p class="section-subheading">
+          Cada fragancia es una composición botánica única formulada para armonizar emociones, elevar la concentración o inducir el descanso.
+        </p>
+
+        <!-- Filtros de familias olfativas -->
+        <div class="fragrance-filters">
+          <button class="frag-filter-btn active" data-family="all">Todos los Aromas (13)</button>
+          <button class="frag-filter-btn" data-family="citrico">Cítricos & Frescos</button>
+          <button class="frag-filter-btn" data-family="dulce">Gourmand & Dulces</button>
+          <button class="frag-filter-btn" data-family="floral">Florales & Delicados</button>
+          <button class="frag-filter-btn" data-family="especiado">Especiados & Cálidos</button>
+          <button class="frag-filter-btn" data-family="bosque">Bosque & Amaderados</button>
+          <button class="frag-filter-btn" data-family="frutal">Frutales & Tropicales</button>
+        </div>
+      </div>
+
+      <!-- Cuadrícula de fragancias con ilustraciones botánicas -->
+      <div class="fragrance-grid" id="fragranceGrid">
+        <!-- Renderizado por js/main.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       3. GUÍA DE AMBIENTES & COBERTURA
+       ========================================================================== -->
+  <section class="room-section" id="ambientes">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <span class="section-label">Aromatización por Espacio</span>
+        <h2 class="section-heading">Simulador de Ambientes & Cobertura</h2>
+        <p class="section-subheading">Conoce qué formato y qué aromas son los recomendados según los metros cuadrados de tu habitación.</p>
+      </div>
+
+      <!-- Botones de Espacios -->
+      <div class="room-selector-btns" id="roomBtnsContainer">
+        <!-- Renderizado por js/main.js -->
+      </div>
+
+      <!-- Detalle del Espacio Seleccionado -->
+      <div id="roomDetailContainer">
+        <!-- Renderizado por js/main.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCENT FINDER QUIZ (TEST INTERACTIVO)
+       ========================================================================== -->
+  <section class="quiz-section" id="quiz">
+    <div class="container">
+      <div class="quiz-card">
+        <span class="section-label">Aroma Finder</span>
+
+        <!-- Paso 1 -->
+        <div class="quiz-step active" data-step="1">
+          <h3 class="quiz-question">1. ¿Qué sensación deseas crear en tu espacio?</h3>
+          <p class="quiz-helper">Selecciona la atmósfera que más resuene con tu momento actual.</p>
+          <div class="quiz-options">
+            <button class="quiz-btn" data-key="vibe" data-val="calm">
+              <span class="icon">🌿</span>
+              <span class="label">Paz & Serenidad</span>
+              <span class="desc">Bajar el ritmo, meditar o dormir mejor</span>
+            </button>
+            <button class="quiz-btn" data-key="vibe" data-val="energy">
+              <span class="icon">⚡</span>
+              <span class="label">Energía & Enfoque</span>
+              <span class="desc">Despertar la mente, trabajar o estudiar</span>
+            </button>
+            <button class="quiz-btn" data-key="vibe" data-val="cozy">
+              <span class="icon">☕</span>
+              <span class="label">Calidez de Hogar</span>
+              <span class="desc">Notas reconfortantes, café y madera</span>
+            </button>
+            <button class="quiz-btn" data-key="vibe" data-val="sweet">
+              <span class="icon">🍓</span>
+              <span class="label">Alegría Frutal</span>
+              <span class="desc">Vibras dulces, veraniegas y lúdicas</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="quiz-step" data-step="2">
+          <h3 class="quiz-question">2. ¿Para qué habitación o lugar principal lo buscas?</h3>
+          <p class="quiz-helper">Cada espacio tiene una personalidad olfativa diferente.</p>
+          <div class="quiz-options">
+            <button class="quiz-btn" data-key="space" data-val="living">
+              <span class="icon">🛋️</span>
+              <span class="label">Living / Sala Común</span>
+              <span class="desc">Espacios amplios y de bienvenida</span>
+            </button>
+            <button class="quiz-btn" data-key="space" data-val="bedroom">
+              <span class="icon">🛏️</span>
+              <span class="label">Dormitorio / Suite</span>
+              <span class="desc">Rincón íntimo y de relajación</span>
+            </button>
+            <button class="quiz-btn" data-key="space" data-val="office">
+              <span class="icon">💼</span>
+              <span class="label">Oficina / Estudio</span>
+              <span class="desc">Concentración y productividad</span>
+            </button>
+            <button class="quiz-btn" data-key="space" data-val="kitchen">
+              <span class="icon">🍋</span>
+              <span class="label">Cocina / Comedor</span>
+              <span class="desc">Neutralizar olores y aportar frescura</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="quiz-step" data-step="3">
+          <h3 class="quiz-question">3. ¿Qué intensidad aromática prefieres?</h3>
+          <p class="quiz-helper">Para ajustar la presencia justa en el ambiente.</p>
+          <div class="quiz-options">
+            <button class="quiz-btn" data-key="intensity" data-val="subtle">
+              <span class="icon">🍃</span>
+              <span class="label">Sutil & Delicada</span>
+              <span class="desc">Un suspiro en el aire que nunca satura</span>
+            </button>
+            <button class="quiz-btn" data-key="intensity" data-val="medium">
+              <span class="icon">🌸</span>
+              <span class="label">Media & Envolvente</span>
+              <span class="desc">Presencia constante y equilibrada</span>
+            </button>
+            <button class="quiz-btn" data-key="intensity" data-val="intense">
+              <span class="icon">🔥</span>
+              <span class="label">Intensa & Marcada</span>
+              <span class="desc">Protagonista indiscutible del ambiente</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Paso 4: Resultado -->
+        <div class="quiz-step" data-step="4">
+          <span class="card-volume">✦ Recomendación Personalizada</span>
+          <h3 class="quiz-question" style="margin-bottom: 20px;">¡Hemos encontrado tu fragancia ideal!</h3>
+          
+          <div class="quiz-result-box" id="quizResultBox">
+            <!-- Renderizado por js/main.js -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       4. CALCULADORA DE AHORRO Y RENDIMIENTO ECO-REFILL
+       ========================================================================== -->
+  <section class="eco-section">
+    <div class="container">
+      <div class="eco-calc-card">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <span class="section-label">Impacto Sostenible</span>
+          <h2 class="section-heading">Calcula tu Ahorro con el Sistema Eco-Refill</h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Reutilizar tus envases de vidrio ámbar es más económico para tu bolsillo y más limpio para el planeta.</p>
+        </div>
+
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+          <label for="ecoSlider" style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--brand-forest-dark); margin-bottom: 8px;">
+            Tu consumo habitual en el hogar: <span id="ecoBottlesLabel" style="color: var(--brand-terracotta);">2 frascos al mes</span>
+          </label>
+          <input type="range" id="ecoSlider" min="1" max="6" value="2" step="1" class="b2b-slider">
+        </div>
+
+        <div class="eco-stats-row">
+          <div class="eco-stat-box">
+            <div class="eco-stat-num" id="ecoSavedMoney">$108.000</div>
+            <div class="eco-stat-label">Ahorro anual estimado comprando recargas</div>
+          </div>
+          <div class="eco-stat-box">
+            <div class="eco-stat-num" id="ecoSavedBottles">24 envases</div>
+            <div class="eco-stat-label">Frascos de vidrio y gatillos ahorrados al año</div>
+          </div>
+          <div class="eco-stat-box">
+            <div class="eco-stat-num" style="color: #2D6A4F;">100%</div>
+            <div class="eco-stat-label">Compromiso con la economía circular</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       5. B2B, HOTELES BOUTIQUE & REGALOS CORPORATIVOS
+       ========================================================================== -->
+  <section class="b2b-section" id="b2b">
+    <div class="container b2b-grid">
+      <div>
+        <span class="section-label">Jeshia Empresas</span>
+        <h2 class="section-heading">Aromatización Corporativa & Ventas Mayoristas</h2>
+        <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 24px;">
+          Diseñamos la identidad olfativa de tu marca, hotel boutique, spa o evento especial. Ofrecemos precios escalonados y opción de etiquetado personalizado con el logo de tu empresa.
+        </p>
+
+        <div class="b2b-tiers-grid">
+          <div class="b2b-tier-item">
+            <div>
+              <b style="color: var(--brand-forest-dark);">Tier 20 a 49 unidades</b>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Matrimonios, eventos medianos y recuerdos</p>
+            </div>
+            <span style="font-weight: 800; color: var(--brand-terracotta); font-size: 1.1rem;">15% OFF</span>
+          </div>
+
+          <div class="b2b-tier-item">
+            <div>
+              <b style="color: var(--brand-forest-dark);">Tier 50 a 99 unidades</b>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Hoteles boutique, spas y clínicas</p>
+            </div>
+            <span style="font-weight: 800; color: var(--brand-terracotta); font-size: 1.1rem;">25% OFF</span>
+          </div>
+
+          <div class="b2b-tier-item">
+            <div>
+              <b style="color: var(--brand-forest-dark);">Tier 100+ unidades</b>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Regalos corporativos de fin de año con logo</p>
+            </div>
+            <span style="font-weight: 800; color: var(--brand-terracotta); font-size: 1.1rem;">35% OFF + Logo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="b2b-calc-card">
+        <h3 class="font-serif" style="font-size: 1.5rem; color: var(--brand-forest-dark); margin-bottom: 6px;">
+          Simulador Rápido de Cotización
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+          Calcula un estimado para Home Sprays 250ml al por mayor:
+        </p>
+
+        <div class="b2b-slider-wrap">
+          <label style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: var(--brand-forest-dark); margin-bottom: 8px;">
+            <span>Cantidad a cotizar:</span>
+            <span id="b2bQtyLabel" style="color: var(--brand-terracotta);">50 unidades</span>
+          </label>
+          <input type="range" id="b2bSlider" min="20" max="200" value="50" step="5" class="b2b-slider">
+        </div>
+
+        <div style="background: var(--bg-main); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--brand-line); margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.88rem;">
+            <span>Descuento aplicado:</span>
+            <b id="b2bDiscountLabel" style="color: #2D6A4F;">25% OFF</b>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.88rem;">
+            <span>Precio unitario estimado:</span>
+            <b id="b2bPriceUnit">$9.000 / un.</b>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 800; color: var(--brand-forest-dark); border-top: 1px solid var(--brand-line); padding-top: 8px;">
+            <span>Total estimado:</span>
+            <span id="b2bTotalEst" style="color: var(--brand-terracotta);">$450.000</span>
+          </div>
+        </div>
+
+        <button class="btn-primary" onclick="requestB2BQuote()" style="width: 100%;">
+          <span>💬</span> Solicitar Cotización Formal por WhatsApp
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SUSTENTABILIDAD Y FILOSOFÍA
+       ========================================================================== -->
+  <section class="philosophy-section" id="filosofia">
+    <div class="container philosophy-grid">
+      <div class="philo-content">
+        <span class="section-label">Filosofía Jeshia</span>
+        <h2 class="section-heading">Lujo Consciente: Perfumería que Respeta tu Entorno</h2>
+        <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px;">
+          En Jeshia creemos que un hogar perfumado no debe costar la salud del planeta ni saturar tu sistema respiratorio. Por eso formulamos con bases limpias, libres de ftalatos y alcoholes agresivos.
+        </p>
+
+        <div class="philo-features">
+          <div class="philo-feature-card">
+            <div class="icon">🧴</div>
+            <h4>Vidrio Ámbar Protector</h4>
+            <p>Bloquea la radiación UV para conservar intactas las notas olfativas y extiende la vida útil de cada fragancia.</p>
+          </div>
+
+          <div class="philo-feature-card">
+            <div class="icon">♻️</div>
+            <h4>Sistema Eco-Refill</h4>
+            <p>Nuestras recargas de 250ml y 500ml permiten rellenar tus envases una y otra vez ahorrando hasta un 25%.</p>
+          </div>
+
+          <div class="philo-feature-card">
+            <div class="icon">🌿</div>
+            <h4>Fijación Prolongada</h4>
+            <p>Esencias botánicas concentradas diseñadas para permanecer en fibras textiles sin manchar sábanas ni sofás.</p>
+          </div>
+
+          <div class="philo-feature-card">
+            <div class="icon">🖐️</div>
+            <h4>Hecho a Mano en Chile</h4>
+            <p>Cada lote es envasado, etiquetado y revisado artesanalmente garantizando la máxima calidad.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="philo-img-wrap">
+        <img src="assets/visuales/Familia.png" alt="Familia Completa de Productos Jeshia" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       RESEÑAS DE CLIENTES
+       ========================================================================== -->
+  <section class="reviews-section" id="opiniones">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <span class="section-label">Experiencias Reales</span>
+        <h2 class="section-heading">Lo que dicen nuestros clientes</h2>
+        <p class="section-subheading">Descubre cómo los aromas de Jeshia llenan de magia los hogares de todo Chile.</p>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"El Home Spray de Mokka es de otro planeta. Entrar a mi departamento y que huela a cafetería de especialidad con notas tostadas es una delicia. La fijación dura horas en cortinas y sillones."</p>
+          <div class="review-meta">
+            <span class="review-author">Camila Valenzuela</span>
+            <span class="review-aroma">☕ Mokka 250 ML</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Buscaba un aroma amaderado que no fuera el típico pino químico, y este es literalmente como caminar por un bosque andino después de la lluvia. Muy elegante y relajante para mi oficina."</p>
+          <div class="review-meta">
+            <span class="review-author">Ignacio Morales</span>
+            <span class="review-aroma">🌲 Pino Silvestre</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Compré el Mikado de Berries y la Recarga de Vainilla Coco. El packaging en vidrio ámbar es un objeto de decoración en sí mismo y la atención por WhatsApp fue impecable."</p>
+          <div class="review-meta">
+            <span class="review-author">Francisca Soto</span>
+            <span class="review-aroma">🫐 Berries & Vainilla</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/logos/Jeshia Colores_Transparent.png" alt="Jeshia" style="height: 48px; filter: brightness(1.2);">
+          <p>
+            Perfumecería botánica y aromatización artesanal para el hogar. Creando experiencias sensoriales memorables en cada rincón.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Colección</h4>
+          <ul class="footer-links">
+            <li><a href="#coleccion">Home Sprays (250ml)</a></li>
+            <li><a href="#coleccion">Difusores Mikado (50ml)</a></li>
+            <li><a href="#coleccion">Aromatizador Auto (15ml)</a></li>
+            <li><a href="#coleccion">Recargas Eco-Refill</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explorar</h4>
+          <ul class="footer-links">
+            <li><a href="#aromas">Los 13 Aromas</a></li>
+            <li><a href="#set-builder">Arma tu Set de Regalo</a></li>
+            <li><a href="#aromaterapia">Aromaterapia</a></li>
+            <li><a href="#ambientes">Guía de Espacios</a></li>
+            <li><a href="#b2b">Empresas & Mayoristas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Atención & Pedidos</h4>
+          <p style="color: var(--text-light); font-size: 0.88rem; margin-bottom: 12px;">
+            Despachos a todo Chile vía Starken y Correos de Chile. Pedidos y atención personalizada directa:
+          </p>
+          <a href="https://wa.me/56912345678?text=Hola%20Jeshia,%20tengo%20una%20consulta%20sobre%20sus%20aromas" target="_blank" class="btn-primary" style="padding: 10px 20px; font-size: 0.82rem; width: 100%;">
+            <span>💬</span> Hablar con Asesora
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Jeshia. Todos los derechos reservados. Hecho con pasión botánica.</p>
+        <p>Santiago de Chile · Envíos Nacionales</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       SLIDE-OVER CART DRAWER CON DISEÑADOR DE TARJETA DE REGALO
+       ========================================================================== -->
+  <div class="cart-drawer-overlay" id="cartOverlay">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3>Tu Carrito de Aromas 🌿</h3>
+        <button class="close-drawer-btn" id="cartCloseBtn">✕</button>
+      </div>
+
+      <div class="cart-items" id="cartItems">
+        <!-- Renderizado dinámico -->
+      </div>
+
+      <div class="cart-footer">
+        <!-- Opción de Tarjeta de Regalo -->
+        <div class="gift-toggle-wrap">
+          <label class="gift-checkbox-label">
+            <input type="checkbox" id="isGiftCheck" style="accent-color: var(--brand-terracotta); width: 16px; height: 16px;">
+            <span>🎁 ¿Es para regalo? (Incluir tarjeta dedicatoria)</span>
+          </label>
+
+          <div class="gift-designer-panel" id="giftDesignerPanel">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+              <input type="text" id="giftTo" placeholder="Para: (ej. Sofía)" class="cart-notes-input" style="margin-bottom: 0;">
+              <input type="text" id="giftFrom" placeholder="De: (ej. Matías)" class="cart-notes-input" style="margin-bottom: 0;">
+            </div>
+            <textarea id="giftMsg" placeholder="Escribe tu dedicatoria especial..." class="cart-notes-input" rows="2" style="margin-bottom: 0;"></textarea>
+
+            <!-- Previsualización de la tarjeta física -->
+            <div class="live-card-preview">
+              <small>✦ Tarjeta Botánica Jeshia ✦</small>
+              <div id="previewCardTo" style="font-weight: 700; margin-top: 4px; font-size: 0.85rem;">Para: Alguien Especial</div>
+              <div id="previewCardMsg" class="live-card-text">"Que estos aromas llenen tu hogar de paz y bienestar."</div>
+              <div id="previewCardFrom" style="font-size: 0.8rem; font-weight: 600; color: var(--brand-terracotta);">Con cariño, Jeshia</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-subtotal">
+          <span>Total Estimado:</span>
+          <span id="cartSubtotal">$0</span>
+        </div>
+
+        <label for="cartNotes" style="display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px;">
+          Notas adicionales de despacho:
+        </label>
+        <textarea id="cartNotes" class="cart-notes-input" rows="2" placeholder="Ej: Dejar en conserjería si no estoy..."></textarea>
+
+        <button class="btn-whatsapp-checkout" onclick="checkoutWhatsApp()">
+          <span>📱</span> Completar Pedido por WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL DE DETALLE RÁPIDO (QUICK VIEW)
+       ========================================================================== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="quickview-modal">
+      <button class="modal-close-btn" id="modalCloseBtn">✕</button>
+      <div id="modalBody">
+        <!-- Renderizado dinámico por js/main.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
