@@ -275,11 +275,11 @@ const PRODUCTS = [
     category: 'home-spray',
     categoryName: 'Home Spray',
     badge: 'Más Vendido ✦',
-    image: 'visuales/Home Spray - Mokka Visual.png',
+    image: 'assets/visuales/Home Spray/Por Aroma/h_mooka.jpg',
     altImages: [
-      'visuales/home_spray_mkt_1.png',
-      'assets/visuales/Home Spray/v_home_spray_1.png',
-      'assets/visuales/Home Spray/v_home_spray_2.png'
+      'assets/visuales/Home Spray/Por Aroma/h_vainilla_coco.jpg',
+      'assets/visuales/Home Spray/Por Aroma/h_lavanda.jpg',
+      'assets/visuales/Home Spray/Por Aroma/h_citric.jpg'
     ],
     tagline: 'Bruma instantánea de alta concentración para textiles, sábanas, cortinas y ambientes.',
     description: 'Envase de vidrio ámbar protector con gatillo pulverizador profesional. Formulado con aceites esenciales botánicos de fijación prolongada.',
@@ -299,11 +299,11 @@ const PRODUCTS = [
     category: 'mikado',
     categoryName: 'Difusores Mikado',
     badge: 'Aroma Continuo ✦',
-    image: 'visuales/Mikado - Berries Visual.png',
+    image: 'assets/visuales/Mikado/Por Aroma/m_berries.jpg',
     altImages: [
-      'visuales/mikado_mkt_1.png',
-      'assets/visuales/Mikado/v_mikado_1.png',
-      'assets/visuales/Mikado/v_mikado_2.png'
+      'assets/visuales/Mikado/Por Aroma/m_vainilla_coco.jpg',
+      'assets/visuales/Mikado/Por Aroma/m_citric.jpg',
+      'assets/visuales/Mikado/Por Aroma/m_mokka.jpg'
     ],
     tagline: 'Difusión pasiva homogénea y constante las 24 horas del día.',
     description: 'Frasco de vidrio ámbar compacto con juego de varillas de ratán de alta absorción que propagan el aroma de forma sutil y continua.',
@@ -323,10 +323,10 @@ const PRODUCTS = [
     category: 'aromatizador',
     categoryName: 'Aromatizador 15ml',
     badge: 'Portátil ✦',
-    image: 'visuales/Aromatizador - Lavanda Visual.png',
+    image: 'assets/visuales/Aromatizador/Por Aroma/a_lavanda.jpg',
     altImages: [
-      'assets/visuales/Aromatizador - Lavanda Visual.png',
-      'assets/montajes/oficiales/Aromatizador Sin Marca.png'
+      'assets/visuales/Aromatizador/Por Aroma/a_vanilla_coco.jpg',
+      'assets/visuales/Aromatizador/Por Aroma/a_citric.jpg'
     ],
     tagline: 'Para vehículos, vestidores, bolsos o tu rincón favorito.',
     description: 'Frasco de precisión con spray directo. Llévalo contigo a donde vayas para una recarga inmediata de bienestar sensorial.',
@@ -346,10 +346,10 @@ const PRODUCTS = [
     category: 'recarga',
     categoryName: 'Recargas Eco',
     badge: 'Eco-Friendly 🌱',
-    image: 'visuales/Recarga 250 - Sugar Visual.png',
+    image: 'assets/visuales/Recarga 250/Por Aroma/r250_sugar.jpg',
     altImages: [
-      'assets/visuales/Recarga 250/v_recarga250_1.png',
-      'assets/visuales/Recarga 250/v_recarga250_2.png'
+      'assets/visuales/Recarga 250/Por Aroma/r250_vainilla_coco.jpg',
+      'assets/visuales/Recarga 250/Por Aroma/r250_berries.jpg'
     ],
     tagline: 'Rellena tus envases favoritos y reduce la huella ambiental.',
     description: 'Botella ecológica de 250 ml con tapa dosificadora, lista para rellenar tus difusores Mikado o frascos de Home Spray.',
@@ -369,10 +369,10 @@ const PRODUCTS = [
     category: 'recarga',
     categoryName: 'Recargas Eco',
     badge: 'Mejor Rendimiento ⭐',
-    image: 'visuales/Recarga 500 - Vainilla Coco Visual.png',
+    image: 'assets/visuales/Recarga 500/Por Aroma/r500_vainilla_coco.jpg',
     altImages: [
-      'assets/visuales/Recarga 500/v_recarga500_1.png',
-      'assets/visuales/Recarga 500/v_recarga500_2.png'
+      'assets/visuales/Recarga 500/Por Aroma/r500_berries.jpg',
+      'assets/visuales/Recarga 500/Por Aroma/r500_citric.jpg'
     ],
     tagline: 'El formato más conveniente para hogares con aroma continuo.',
     description: 'Formato familiar de 500 ml para rellenar múltiples frascos del hogar. Máxima economía y duración.',
@@ -385,6 +385,85 @@ const PRODUCTS = [
     defaultFragrance: 'vainilla-coco'
   }
 ];
+
+// Mapa Oficial Exhaustivo de 65 Imágenes Reales por Formato y Aroma
+const PRODUCT_AROMA_IMAGES = {
+  'home-spray-250': {
+    'vainilla-coco': 'assets/visuales/Home Spray/Por Aroma/h_vainilla_coco.jpg',
+    'citric': 'assets/visuales/Home Spray/Por Aroma/h_citric.jpg',
+    'berries': 'assets/visuales/Home Spray/Por Aroma/h_berries.jpg',
+    'coco-nut': 'assets/visuales/Home Spray/Por Aroma/h_coco_nut.jpg',
+    'sugar': 'assets/visuales/Home Spray/Por Aroma/h_sugar.jpg',
+    'chicle': 'assets/visuales/Home Spray/Por Aroma/h_chicle.jpg',
+    'manzana-canela': 'assets/visuales/Home Spray/Por Aroma/h_manzana_canela.jpg',
+    'coco-flower': 'assets/visuales/Home Spray/Por Aroma/h_coco_flower.jpg',
+    'mokka': 'assets/visuales/Home Spray/Por Aroma/h_mooka.jpg',
+    'limon': 'assets/visuales/Home Spray/Por Aroma/h_limon.jpg',
+    'pino': 'assets/visuales/Home Spray/Por Aroma/h_pino.jpg',
+    'lavanda': 'assets/visuales/Home Spray/Por Aroma/h_lavanda.jpg',
+    'frutal-mango': 'assets/visuales/Home Spray/Por Aroma/h_frutal_mango.jpg'
+  },
+  'mikado-50': {
+    'vainilla-coco': 'assets/visuales/Mikado/Por Aroma/m_vainilla_coco.jpg',
+    'citric': 'assets/visuales/Mikado/Por Aroma/m_citric.jpg',
+    'berries': 'assets/visuales/Mikado/Por Aroma/m_berries.jpg',
+    'coco-nut': 'assets/visuales/Mikado/Por Aroma/m_coconut.jpg',
+    'sugar': 'assets/visuales/Mikado/Por Aroma/m_sugar.jpg',
+    'chicle': 'assets/visuales/Mikado/Por Aroma/m_chicle.jpg',
+    'manzana-canela': 'assets/visuales/Mikado/Por Aroma/m_manzana_canela.jpg',
+    'coco-flower': 'assets/visuales/Mikado/Por Aroma/m_coco_flower.jpg',
+    'mokka': 'assets/visuales/Mikado/Por Aroma/m_mokka.jpg',
+    'limon': 'assets/visuales/Mikado/Por Aroma/m_limon.jpg',
+    'pino': 'assets/visuales/Mikado/Por Aroma/m_pino.jpg',
+    'lavanda': 'assets/visuales/Mikado/Por Aroma/m_lavanda.jpg',
+    'frutal-mango': 'assets/visuales/Mikado/Por Aroma/m_frutal_mango.jpg'
+  },
+  'aromatizador-15': {
+    'vainilla-coco': 'assets/visuales/Aromatizador/Por Aroma/a_vanilla_coco.jpg',
+    'citric': 'assets/visuales/Aromatizador/Por Aroma/a_citric.jpg',
+    'berries': 'assets/visuales/Aromatizador/Por Aroma/a_berries.jpg',
+    'coco-nut': 'assets/visuales/Aromatizador/Por Aroma/a_coco_nut.jpg',
+    'sugar': 'assets/visuales/Aromatizador/Por Aroma/a_sugar.jpg',
+    'chicle': 'assets/visuales/Aromatizador/Por Aroma/a_chicle.jpg',
+    'manzana-canela': 'assets/visuales/Aromatizador/Por Aroma/a_manzana_canela.jpg',
+    'coco-flower': 'assets/visuales/Aromatizador/Por Aroma/a_coco_flower.jpg',
+    'mokka': 'assets/visuales/Aromatizador/Por Aroma/a_mokka.jpg',
+    'limon': 'assets/visuales/Aromatizador/Por Aroma/a_limon.jpg',
+    'pino': 'assets/visuales/Aromatizador/Por Aroma/a_pino.jpg',
+    'lavanda': 'assets/visuales/Aromatizador/Por Aroma/a_lavanda.jpg',
+    'frutal-mango': 'assets/visuales/Aromatizador/Por Aroma/a_frutal_mango.jpg'
+  },
+  'recarga-250': {
+    'vainilla-coco': 'assets/visuales/Recarga 250/Por Aroma/r250_vainilla_coco.jpg',
+    'citric': 'assets/visuales/Recarga 250/Por Aroma/r250_citric.jpg',
+    'berries': 'assets/visuales/Recarga 250/Por Aroma/r250_berries.jpg',
+    'coco-nut': 'assets/visuales/Recarga 250/Por Aroma/r250_coco_nut.jpg',
+    'sugar': 'assets/visuales/Recarga 250/Por Aroma/r250_sugar.jpg',
+    'chicle': 'assets/visuales/Recarga 250/Por Aroma/r250_chicle.jpg',
+    'manzana-canela': 'assets/visuales/Recarga 250/Por Aroma/r250_manzana_canela.jpg',
+    'coco-flower': 'assets/visuales/Recarga 250/Por Aroma/r250_coco_flower.jpg',
+    'mokka': 'assets/visuales/Recarga 250/Por Aroma/r250_mokka.jpg',
+    'limon': 'assets/visuales/Recarga 250/Por Aroma/r250_limon.jpg',
+    'pino': 'assets/visuales/Recarga 250/Por Aroma/r250_pino.jpg',
+    'lavanda': 'assets/visuales/Recarga 250/Por Aroma/r250_lavanda.jpg',
+    'frutal-mango': 'assets/visuales/Recarga 250/Por Aroma/r250_frutal_mango.jpg'
+  },
+  'recarga-500': {
+    'vainilla-coco': 'assets/visuales/Recarga 500/Por Aroma/r500_vainilla_coco.jpg',
+    'citric': 'assets/visuales/Recarga 500/Por Aroma/r500_citric.jpg',
+    'berries': 'assets/visuales/Recarga 500/Por Aroma/r500_berries.jpg',
+    'coco-nut': 'assets/visuales/Recarga 500/Por Aroma/r500_coco_nut.jpg',
+    'sugar': 'assets/visuales/Recarga 500/Por Aroma/r500_sugar.jpg',
+    'chicle': 'assets/visuales/Recarga 500/Por Aroma/r500_chicle.jpg',
+    'manzana-canela': 'assets/visuales/Recarga 500/Por Aroma/r500_manzana_canela.jpg',
+    'coco-flower': 'assets/visuales/Recarga 500/Por Aroma/r500_coco_flower.jpg',
+    'mokka': 'assets/visuales/Recarga 500/Por Aroma/r500_mokka.jpg',
+    'limon': 'assets/visuales/Recarga 500/Por Aroma/r500_limon.jpg',
+    'pino': 'assets/visuales/Recarga 500/Por Aroma/r500_pino.jpg',
+    'lavanda': 'assets/visuales/Recarga 500/Por Aroma/r500_lavanda.jpg',
+    'frutal-mango': 'assets/visuales/Recarga 500/Por Aroma/r500_frutal_mango.jpg'
+  }
+};
 
 const PACKS = [
   {
@@ -542,6 +621,20 @@ function getFragranceById(id) {
 // Helper para obtener producto por ID
 function getProductById(id) {
   return PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
+}
+
+// Helper para obtener la fotografía real de un producto según su formato y fragancia
+function getProductAromaImage(productId, fragranceId) {
+  if (PRODUCT_AROMA_IMAGES[productId] && PRODUCT_AROMA_IMAGES[productId][fragranceId]) {
+    return PRODUCT_AROMA_IMAGES[productId][fragranceId];
+  }
+  const prod = getProductById(productId);
+  return prod ? prod.image : 'assets/visuales/Familia.png';
+}
+
+// Helper para obtener la fotografía real del aroma (por defecto en formato Home Spray o el solicitado)
+function getFragranceVisualImage(fragranceId, formatId = 'home-spray-250') {
+  return getProductAromaImage(formatId, fragranceId);
 }
 
 // Formateador de moneda chilena

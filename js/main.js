@@ -200,6 +200,7 @@ function renderProducts() {
 
   grid.innerHTML = filtered.map(prod => {
     const selectedFrag = matchedFragId || prod.defaultFragrance;
+    const initialImg = getProductAromaImage(prod.id, selectedFrag);
     const scentOptions = FRAGRANCES.map(f => `
       <option value="${f.id}" ${f.id === selectedFrag ? 'selected' : ''}>
         ${f.icon} ${f.name} (${f.subtitle})
@@ -210,7 +211,7 @@ function renderProducts() {
       <article class="product-card" data-product-id="${prod.id}">
         <span class="card-badge">${prod.badge}</span>
         <div class="card-img-container">
-          <img src="${prod.image}" alt="${prod.name}" id="img-${prod.id}" loading="lazy">
+          <img src="${initialImg}" alt="${prod.name}" id="img-${prod.id}" loading="lazy">
         </div>
         <div class="card-body">
           <span class="card-volume">${prod.volume} · ${prod.categoryName}</span>
@@ -220,7 +221,7 @@ function renderProducts() {
           <div class="scent-picker">
             <label for="select-${prod.id}">Seleccionar Fragancia:</label>
             <div class="scent-select-wrap">
-              <select class="scent-select" id="select-${prod.id}">
+              <select class="scent-select" id="select-${prod.id}" onchange="changeProductCardScent('${prod.id}', this.value)">
                 ${scentOptions}
               </select>
             </div>
@@ -239,6 +240,13 @@ function renderProducts() {
       </article>
     `;
   }).join('');
+}
+
+function changeProductCardScent(productId, fragranceId) {
+  const img = document.getElementById(`img-${productId}`);
+  if (img) {
+    img.src = getProductAromaImage(productId, fragranceId);
+  }
 }
 
 /* ==========================================================================
@@ -269,10 +277,11 @@ function renderUniverse() {
     : FRAGRANCES.filter(f => f.family === currentFragFamily);
 
   grid.innerHTML = filtered.map(frag => {
+    const fragVisual = getProductAromaImage('home-spray-250', frag.id);
     return `
       <div class="fragrance-card" style="--frag-accent: ${frag.color}" onclick="openFragranceModal('${frag.id}')">
         <div class="frag-art-wrap">
-          <img src="${frag.image}" alt="${frag.name}" loading="lazy">
+          <img src="${fragVisual}" alt="${frag.name}" loading="lazy">
         </div>
         <span class="frag-family-tag">${frag.icon} ${frag.familyName}</span>
         <h3 class="frag-name">${frag.name}</h3>
@@ -333,11 +342,12 @@ function renderComparison() {
 
 function renderCompareCard(frag) {
   const homeSprayPrice = PRODUCTS.find(p => p.id === 'home-spray-250')?.price || 12990;
+  const fragPhoto = getProductAromaImage('home-spray-250', frag.id);
   return `
     <div class="compare-card" style="--compare-color: ${frag.color}">
       <div class="compare-card-header">
         <div class="compare-art-wrap">
-          <img src="${frag.image}" alt="${frag.name}" loading="lazy">
+          <img src="${fragPhoto}" alt="${frag.name}" loading="lazy">
         </div>
         <div class="compare-title-area">
           <span class="frag-family-tag">${frag.icon} ${frag.familyName}</span>
@@ -429,12 +439,13 @@ function calculateQuizResult() {
   }
 
   const frag = getFragranceById(matchedId);
+  const quizPhoto = getProductAromaImage('home-spray-250', frag.id);
   const container = document.getElementById('quizResultBox');
 
   if (container) {
     container.innerHTML = `
       <div class="quiz-result-art">
-        <img src="${frag.image}" alt="${frag.name}" style="max-width: 90%; max-height: 90%; object-fit: contain;">
+        <img src="${quizPhoto}" alt="${frag.name}" style="max-width: 90%; max-height: 90%; object-fit: contain;">
       </div>
       <div>
         <span class="card-volume">${frag.icon} ${frag.familyName}</span>
@@ -661,16 +672,19 @@ function renderMoodShowcase(moodId) {
       </h4>
 
       <div class="mood-frag-cards">
-        ${matchedFrags.map(f => `
-          <div class="mood-frag-item" onclick="openFragranceModal('${f.id}')">
-            <img src="${f.image}" alt="${f.name}" style="height: 70px; margin: 0 auto 10px; object-fit: contain;">
-            <h5 style="font-size: 1.1rem; color: #fff; margin-bottom: 4px;">${f.name}</h5>
-            <p style="font-size: 0.78rem; color: var(--text-light); margin-bottom: 12px;">${f.subtitle}</p>
-            <button class="btn-primary" style="padding: 8px 16px; font-size: 0.75rem; width: 100%;">
-              Ver Ficha
-            </button>
-          </div>
-        `).join('')}
+        ${matchedFrags.map(f => {
+          const fragImg = getProductAromaImage('home-spray-250', f.id);
+          return `
+            <div class="mood-frag-item" onclick="openFragranceModal('${f.id}')">
+              <img src="${fragImg}" alt="${f.name}" style="height: 75px; margin: 0 auto 10px; object-fit: contain;">
+              <h5 style="font-size: 1.1rem; color: #fff; margin-bottom: 4px;">${f.name}</h5>
+              <p style="font-size: 0.78rem; color: var(--text-light); margin-bottom: 12px;">${f.subtitle}</p>
+              <button class="btn-primary" style="padding: 8px 16px; font-size: 0.75rem; width: 100%;">
+                Ver Ficha
+              </button>
+            </div>
+          `;
+        }).join('')}
       </div>
     </div>
   `;
@@ -909,7 +923,7 @@ function addToCart(productId, fragranceId, qty = 1) {
       name: product.name,
       volume: product.volume,
       price: product.price,
-      image: product.image,
+      image: getProductAromaImage(productId, fragranceId),
       fragranceName: fragrance.name,
       fragranceIcon: fragrance.icon,
       qty: qty
@@ -1064,6 +1078,7 @@ function openFragranceModal(fragranceId, preselectedFormatId = 'home-spray-250')
   if (!modalContent || !overlay) return;
 
   const currentProd = getProductById(selectedFragranceFormat) || PRODUCTS[0];
+  const fragModalImg = getProductAromaImage(selectedFragranceFormat, frag.id);
 
   const formatButtons = PRODUCTS.map(p => `
     <button class="format-option-btn ${p.id === selectedFragranceFormat ? 'active' : ''}" 
@@ -1076,9 +1091,9 @@ function openFragranceModal(fragranceId, preselectedFormatId = 'home-spray-250')
   modalContent.innerHTML = `
     <div class="modal-grid">
       <div class="modal-img-wrap" style="position: relative;">
-        <img src="${frag.image}" alt="${frag.name}" style="max-width: 80%; max-height: 80%; object-fit: contain;">
+        <img src="${fragModalImg}" alt="${frag.name}" style="max-width: 85%; max-height: 85%; object-fit: contain;">
         <div style="position: absolute; bottom: 16px; left: 16px; background: rgba(255,255,255,0.95); padding: 6px 12px; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700; color: var(--brand-forest-dark); box-shadow: var(--shadow-sm);">
-          ${frag.icon} ${frag.name}
+          ${frag.icon} ${frag.name} · ${currentProd.categoryName}
         </div>
       </div>
       <div class="modal-content">
@@ -1134,6 +1149,7 @@ function openProductQuickView(productId, specificFragranceId = null) {
   const select = document.getElementById(`select-${productId}`);
   const currentFragId = specificFragranceId || (select ? select.value : prod.defaultFragrance);
   const frag = getFragranceById(currentFragId);
+  const quickViewImg = getProductAromaImage(prod.id, currentFragId);
 
   const modalContent = document.getElementById('modalBody');
   const overlay = document.getElementById('modalOverlay');
@@ -1149,7 +1165,7 @@ function openProductQuickView(productId, specificFragranceId = null) {
   modalContent.innerHTML = `
     <div class="modal-grid">
       <div class="modal-img-wrap" style="position: relative;">
-        <img src="${prod.image}" alt="${prod.name}" style="max-width: 85%; max-height: 85%; object-fit: contain;">
+        <img src="${quickViewImg}" alt="${prod.name}" style="max-width: 85%; max-height: 85%; object-fit: contain;">
         <div style="position: absolute; bottom: 16px; left: 16px; background: rgba(255,255,255,0.92); padding: 6px 12px; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700; color: var(--brand-forest-dark); box-shadow: var(--shadow-sm);">
           ${frag.icon} Aroma: ${frag.name}
         </div>
