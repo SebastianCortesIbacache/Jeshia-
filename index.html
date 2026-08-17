@@ -245,18 +245,18 @@
             </h3>
             <div style="display: flex; flex-direction: column; gap: 16px;">
               <div>
-                <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">
+                <label for="boxFrag1" style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">
                   Fragancia 1 (Principal):
                 </label>
-                <select id="boxFrag1" class="scent-select">
+                <select id="boxFrag1" name="boxFrag1" class="scent-select" title="Seleccionar Fragancia 1 Principal" aria-label="Fragancia 1 Principal">
                   <!-- Llenado dinámico -->
                 </select>
               </div>
               <div>
-                <label style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">
+                <label for="boxFrag2" style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">
                   Fragancia 2 (Secundaria):
                 </label>
-                <select id="boxFrag2" class="scent-select">
+                <select id="boxFrag2" name="boxFrag2" class="scent-select" title="Seleccionar Fragancia 2 Secundaria" aria-label="Fragancia 2 Secundaria">
                   <!-- Llenado dinámico -->
                 </select>
               </div>
@@ -269,7 +269,10 @@
               <span class="badge-num">3</span> ¿Deseas agregar un extra con descuento?
             </h3>
             <div>
-              <select id="boxAddon" class="scent-select">
+              <label for="boxAddon" style="display: block; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;">
+                Complemento Extra Opcional:
+              </label>
+              <select id="boxAddon" name="boxAddon" class="scent-select" title="Seleccionar Complemento Extra Opcional" aria-label="Complemento Extra Opcional">
                 <option value="none">Sin extra adicional</option>
                 <option value="mini-auto">+ Aromatizador Compacto Auto 15ml (+$3.500)</option>
                 <option value="eco-250">+ Recarga Eco-Refill 250ml (+$7.500)</option>
@@ -377,7 +380,7 @@
         <div class="compare-selectors-grid">
           <div class="compare-select-col">
             <label for="compareFragA">🌿 Aroma 1:</label>
-            <select id="compareFragA" class="scent-select compare-select">
+            <select id="compareFragA" name="compareFragA" class="scent-select compare-select" title="Seleccionar Primer Aroma para Comparar" aria-label="Primer Aroma para Comparar">
               <!-- Llenado dinámico -->
             </select>
           </div>
@@ -386,7 +389,7 @@
 
           <div class="compare-select-col">
             <label for="compareFragB">🌸 Aroma 2:</label>
-            <select id="compareFragB" class="scent-select compare-select">
+            <select id="compareFragB" name="compareFragB" class="scent-select compare-select" title="Seleccionar Segundo Aroma para Comparar" aria-label="Segundo Aroma para Comparar">
               <!-- Llenado dinámico -->
             </select>
           </div>
@@ -609,11 +612,11 @@
         </p>
 
         <div class="b2b-slider-wrap">
-          <label style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: var(--brand-forest-dark); margin-bottom: 8px;">
+          <label for="b2bSlider" style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: var(--brand-forest-dark); margin-bottom: 8px;">
             <span>Cantidad a cotizar:</span>
             <span id="b2bQtyLabel" style="color: var(--brand-terracotta);">50 unidades</span>
           </label>
-          <input type="range" id="b2bSlider" min="20" max="200" value="50" step="5" class="b2b-slider">
+          <input type="range" id="b2bSlider" name="b2bSlider" min="20" max="200" value="50" step="5" class="b2b-slider" title="Cantidad de unidades a cotizar" aria-label="Cantidad de unidades a cotizar">
         </div>
 
         <div style="background: var(--bg-main); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--brand-line); margin-bottom: 24px;">
@@ -764,7 +767,7 @@
           <p style="color: var(--text-light); font-size: 0.88rem; margin-bottom: 12px;">
             Despachos a todo Chile vía Starken y Correos de Chile. Pedidos y atención personalizada directa:
           </p>
-          <a href="https://wa.me/56912345678?text=Hola%20Jeshia,%20tengo%20una%20consulta%20sobre%20sus%20aromas" target="_blank" class="btn-primary" style="padding: 10px 20px; font-size: 0.82rem; width: 100%;">
+          <a href="https://wa.me/56912345678?text=Hola%20Jeshia,%20tengo%20una%20consulta%20sobre%20sus%20aromas" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 10px 20px; font-size: 0.82rem; width: 100%;">
             <span>💬</span> Hablar con Asesora
           </a>
         </div>
@@ -801,10 +804,10 @@
 
           <div class="gift-designer-panel" id="giftDesignerPanel">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-              <input type="text" id="giftTo" placeholder="Para: (ej. Sofía)" class="cart-notes-input" style="margin-bottom: 0;">
-              <input type="text" id="giftFrom" placeholder="De: (ej. Matías)" class="cart-notes-input" style="margin-bottom: 0;">
+              <input type="text" id="giftTo" name="giftTo" placeholder="Para: (ej. Sofía)" class="cart-notes-input" style="margin-bottom: 0;" title="Nombre de quien recibe el regalo" aria-label="Nombre de quien recibe el regalo">
+              <input type="text" id="giftFrom" name="giftFrom" placeholder="De: (ej. Matías)" class="cart-notes-input" style="margin-bottom: 0;" title="Nombre de quien envía el regalo" aria-label="Nombre de quien envía el regalo">
             </div>
-            <textarea id="giftMsg" placeholder="Escribe tu dedicatoria especial..." class="cart-notes-input" rows="2" style="margin-bottom: 0;"></textarea>
+            <textarea id="giftMsg" name="giftMsg" placeholder="Escribe tu dedicatoria especial..." class="cart-notes-input" rows="2" style="margin-bottom: 0;" title="Mensaje de dedicatoria" aria-label="Mensaje de dedicatoria"></textarea>
 
             <!-- Previsualización de la tarjeta física -->
             <div class="live-card-preview">
@@ -824,7 +827,7 @@
         <label for="cartNotes" style="display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px;">
           Notas adicionales de despacho:
         </label>
-        <textarea id="cartNotes" class="cart-notes-input" rows="2" placeholder="Ej: Dejar en conserjería si no estoy..."></textarea>
+        <textarea id="cartNotes" name="cartNotes" class="cart-notes-input" rows="2" placeholder="Ej: Dejar en conserjería si no estoy..." title="Notas adicionales de despacho" aria-label="Notas adicionales de despacho"></textarea>
 
         <button class="btn-whatsapp-checkout" onclick="checkoutWhatsApp()">
           <span>📱</span> Completar Pedido por WhatsApp
@@ -854,7 +857,7 @@
       <p class="tooltip-title">🌿 <b>¿Dudas con tu aroma ideal?</b></p>
       <span class="tooltip-desc">Chatea en vivo con nuestra asesora botánica.</span>
     </div>
-    <a href="https://wa.me/56912345678?text=Hola%20Jeshia,%20estoy%20navegando%20en%20su%20tienda%20web%20y%20me%20gustar%C3%ADa%20recibir%20asesor%C3%ADa%20personalizada%20sobre%20sus%20aromas%20bot%C3%A1nicos%20%E2%9C%A8" target="_blank" class="whatsapp-float-btn" id="whatsappFloatBtn" title="Asesoría personalizada por WhatsApp" aria-label="Abrir chat de WhatsApp con una asesora">
+    <a href="https://wa.me/56912345678?text=Hola%20Jeshia,%20estoy%20navegando%20en%20su%20tienda%20web%20y%20me%20gustar%C3%ADa%20recibir%20asesor%C3%ADa%20personalizada%20sobre%20sus%20aromas%20bot%C3%A1nicos%20%E2%9C%A8" target="_blank" rel="noopener noreferrer" class="whatsapp-float-btn" id="whatsappFloatBtn" title="Asesoría personalizada por WhatsApp" aria-label="Abrir chat de WhatsApp con una asesora">
       <span class="whatsapp-pulse-ring"></span>
       <span class="whatsapp-icon">💬</span>
       <span class="whatsapp-badge-dot"></span>
