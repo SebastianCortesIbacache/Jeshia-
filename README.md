@@ -8,26 +8,20 @@ Este repositorio contiene la identidad visual, la suite completa de **etiquetas 
 
 ```
 Logo Jeshia/
-├── index.html                   # Dashboard principal de presentación del proyecto
-├── generar_revision.js          # Script principal de generación automática de etiquetas HD
-├── generate_labels.js           # Generador de etiquetas para suite web
+├── index.html                   # Sitio web oficial e-commerce interactivo
+├── css/
+│   └── main.css                 # Sistema de diseño, tokens, responsive y glassmorphism
+├── js/
+│   ├── products.js              # Base de datos de productos, 13 aromas y pirámides olfativas
+│   └── main.js                  # Lógica interactiva, carrito drawer, filtros y WhatsApp checkout
 ├── README.md                    # Documentación del proyecto
-├── .gitignore                   # Archivos ignorados para Git
-├── assets/                      # Logos e ilustraciones botánicasvectorizadas/limpias
-│   ├── logos/                   # Logotipo oficial de Jeshia
+├── MEMORY.md                    # Memoria viva de decisiones y requerimientos
+├── assets/                      # Logos e ilustraciones botánicas transparentes
+│   ├── logos/                   # Logotipo oficial de Jeshia en alta resolución
 │   ├── aromas_botanicos/        # Ilustraciones botánicas transparentes por aroma
-│   └── envases/                 # Fotografías y montajes realistas de producto
-├── etiquetas/                   # Suite interactiva y manual de marca
-│   ├── index.html               # Galería interactiva con vista de productos y montajes
-│   └── manual_logo.html         # Manual interactivo de uso del logo
-├── etiquetas_impresion/         # Portal de descarga de etiquetas HD (listas para imprenta)
-│   ├── index.html               # Visor HD con descarga directa de PNGs
-│   ├── 01_Mikado_50x25mm/       # 13 etiquetas formato horizontal Mikado (50x25 mm)
-│   ├── 02_Home_Spray_60x75mm/   # 13 etiquetas formato vertical Home Spray 250 ML (60x75 mm)
-│   ├── 04_Recarga_250ml_60x75mm/# 13 etiquetas formato vertical Recarga Eco 250 ML (60x75 mm)
-│   └── 05_Recarga_500ml_60x100mm/# 13 etiquetas formato vertical Recarga Familiar 500 ML (75x120 mm)
-├── revision_manual/             # Salida de la suite oficial completa de etiquetas
-└── propuesta-a / b / c /        # 3 propuestas completas de tienda e-commerce
+│   └── visuales/                # Renders oficiales y montajes de producto
+├── visuales/                    # Piezas de marketing y montajes de producto
+└── etiquetas_impresion/         # Portal de descarga de etiquetas HD (listas para imprenta)
 ```
 
 ---

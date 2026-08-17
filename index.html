@@ -11,8 +11,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- Favicon -->
+  <!-- Favicon Oficial -->
   <link rel="icon" type="image/png" href="assets/logos/Jeshia Colores_Transparent.png">
+  <link rel="apple-touch-icon" href="assets/logos/Jeshia Colores_Transparent.png">
+
+  <!-- OpenGraph / Social Meta Tags (Preview WhatsApp, Instagram, Facebook) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jeshia (Home & Aromas)">
+  <meta property="og:title" content="Jeshia — Aromas Botánicos, Home Sprays & Difusores Mikado">
+  <meta property="og:description" content="Perfumecería botánica y aromatización artesanal para el hogar. Home sprays en vidrio ámbar, difusores mikado, aromatizadores y recargas ecológicas en 13 fragancias exclusivas.">
+  <meta property="og:image" content="assets/logos/Jeshia Colores_Transparent.png">
+  <meta property="og:url" content="https://sebastiancortesibacache.github.io/Jeshia-/">
+  
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jeshia — Aromas Botánicos & Lujo Natural">
+  <meta name="twitter:description" content="Transforma tu hogar en un santuario botánico con 13 fragancias exclusivas en vidrio ámbar reutilizable.">
+  <meta name="twitter:image" content="assets/logos/Jeshia Colores_Transparent.png">
 
   <!-- Estilos Maestros -->
   <link rel="stylesheet" href="css/main.css">
@@ -39,6 +54,7 @@
         <ul class="nav-menu">
           <li><a href="#coleccion" class="nav-link">Colección</a></li>
           <li><a href="#aromas" class="nav-link">13 Aromas</a></li>
+          <li><a href="#comparador" class="nav-link">Comparador</a></li>
           <li><a href="#set-builder" class="nav-link">Arma tu Set</a></li>
           <li><a href="#aromaterapia" class="nav-link">Aromaterapia</a></li>
           <li><a href="#ambientes" class="nav-link">Guía de Espacios</a></li>
@@ -161,6 +177,21 @@
           <button class="cat-tab" data-category="aromatizador">Aromatizador 15ml</button>
           <button class="cat-tab" data-category="recarga">Recargas Eco-Refill</button>
         </div>
+
+        <!-- Buscador de Fragancias en Tiempo Real -->
+        <div class="search-bar-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="catalogSearchInput" class="catalog-search-input" placeholder="Buscar por aroma o notas (ej: Vainilla, Bergamota, Canela, Lavanda, Café)..." autocomplete="off" aria-label="Buscar fragancias">
+          <button id="clearSearchBtn" class="clear-search-btn" title="Limpiar búsqueda">✕</button>
+        </div>
+      </div>
+
+      <!-- Mensaje cuando no hay resultados de búsqueda -->
+      <div id="noSearchResults" class="no-search-results" style="display: none;">
+        <span>🌿</span>
+        <h3>No encontramos fragancias con ese término</h3>
+        <p>Prueba buscando por notas como <em>cítrico, vainilla, dulce, amaderado</em> o limpia la búsqueda para ver todas.</p>
+        <button class="btn-outline" onclick="clearCatalogSearch()" style="margin-top: 12px;">Limpiar Búsqueda</button>
       </div>
 
       <!-- Cuadrícula dinámica de productos -->
@@ -325,6 +356,46 @@
       <!-- Cuadrícula de fragancias con ilustraciones botánicas -->
       <div class="fragrance-grid" id="fragranceGrid">
         <!-- Renderizado por js/main.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       COMPARADOR INTERACTIVO DE AROMAS BOTÁNICOS (LADO A LADO)
+       ========================================================================== -->
+  <section class="comparator-section" id="comparador">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 36px;">
+        <span class="section-label">Duelo de Fragancias</span>
+        <h2 class="section-heading">Comparador Interactivo de Aromas</h2>
+        <p class="section-subheading">
+          Selecciona dos fragancias y contrasta sus notas de salida, corazón, fondo, estado de ánimo y espacios recomendados.
+        </p>
+      </div>
+
+      <div class="comparator-box">
+        <div class="compare-selectors-grid">
+          <div class="compare-select-col">
+            <label for="compareFragA">🌿 Aroma 1:</label>
+            <select id="compareFragA" class="scent-select compare-select">
+              <!-- Llenado dinámico -->
+            </select>
+          </div>
+
+          <div class="compare-vs-badge">VS</div>
+
+          <div class="compare-select-col">
+            <label for="compareFragB">🌸 Aroma 2:</label>
+            <select id="compareFragB" class="scent-select compare-select">
+              <!-- Llenado dinámico -->
+            </select>
+          </div>
+        </div>
+
+        <!-- Tabla comparativa dinámica -->
+        <div class="compare-cards-grid" id="compareCardsGrid">
+          <!-- Renderizado por js/main.js -->
+        </div>
       </div>
     </div>
   </section>
@@ -772,6 +843,22 @@
         <!-- Renderizado dinámico por js/main.js -->
       </div>
     </div>
+  </div>
+
+  <!-- ==========================================================================
+       WIDGET FLOTANTE DE ASESORÍA BOTÁNICA WHATSAPP
+       ========================================================================== -->
+  <div class="floating-whatsapp-widget" id="floatingWhatsappWidget">
+    <div class="whatsapp-tooltip" id="whatsappTooltip">
+      <button class="whatsapp-tooltip-close" id="closeWhatsappTooltip" title="Cerrar mensaje">✕</button>
+      <p class="tooltip-title">🌿 <b>¿Dudas con tu aroma ideal?</b></p>
+      <span class="tooltip-desc">Chatea en vivo con nuestra asesora botánica.</span>
+    </div>
+    <a href="https://wa.me/56912345678?text=Hola%20Jeshia,%20estoy%20navegando%20en%20su%20tienda%20web%20y%20me%20gustar%C3%ADa%20recibir%20asesor%C3%ADa%20personalizada%20sobre%20sus%20aromas%20bot%C3%A1nicos%20%E2%9C%A8" target="_blank" class="whatsapp-float-btn" id="whatsappFloatBtn" title="Asesoría personalizada por WhatsApp" aria-label="Abrir chat de WhatsApp con una asesora">
+      <span class="whatsapp-pulse-ring"></span>
+      <span class="whatsapp-icon">💬</span>
+      <span class="whatsapp-badge-dot"></span>
+    </a>
   </div>
 
   <!-- Scripts -->

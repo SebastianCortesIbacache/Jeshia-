@@ -131,5 +131,17 @@ e:\Logo Jeshia\
 5. **5 líneas de producto** con sus visuales en `visuales/` referenciados por path relativo
 6. **Descuentos del Box Builder:** Dúo 15% OFF, Trío 20% OFF, Solo = precio normal
 
+### [2026-08-17] — Implementación Integral de Mejoras de Auditoría Web y Packaging
+- **Plataforma Web ([`index.html`](file:///e:/Logo%20Jeshia/index.html), [`css/main.css`](file:///e:/Logo%20Jeshia/css/main.css), [`js/main.js`](file:///e:/Logo%20Jeshia/js/main.js)):**
+  1. 🌐 **Metadatos OpenGraph y Twitter Cards:** Integradas etiquetas sociales para preview elegante al compartir en WhatsApp e Instagram.
+  2. 🔍 **Buscador en Tiempo Real:** Barra predictiva interactiva en `#coleccion` con filtrado dinámico por aroma, notas o familia, y botón de limpieza inmediata.
+  3. ⚔️ **Comparador Interactivo de Aromas:** Nueva sección `#comparador` para contrastar dos fragancias lado a lado (pirámide olfativa, mood, espacio y compra directa).
+  4. 🛍️ **Selector de Formato en Modal Quick View:** Permite elegir entre las 5 líneas de producto y añadir al carrito en 1 clic directamente desde el modal de fragancia.
+  5. 💬 **Widget Flotante de Asistencia WhatsApp:** Botón con anillo pulsante y tooltip interactivo (*"¿Dudas con tu aroma ideal? Chatea con una asesora"*).
+  6. 🐛 **Corrección Crítica de WhatsApp Checkout:** Corregido el bug de truncado por caracteres `&` mediante `encodeURIComponent()` completo en el generador de mensajes.
+- **Packaging e Imprenta ([`etiquetas_impresion/`](file:///e:/Logo%20Jeshia/etiquetas_impresion)):**
+  1. 📐 **Generador con Sangrado Bleed de 2mm:** [`generar_pliego_imprenta_bleed.py`](file:///e:/Logo%20Jeshia/etiquetas_impresion/generar_pliego_imprenta_bleed.py) para evitar cortes blancos en guillotina.
+  2. ✨ **Generador de Capas de Reserva Spot UV (K:100%):** [`generar_mascara_spot_uv.py`](file:///e:/Logo%20Jeshia/etiquetas_impresion/generar_mascara_spot_uv.py) para barniz sectorizado y estampado foil dorado del logo Jeshia.
+
 ---
 *Nota: Este documento se actualiza automáticamente en cada sesión de desarrollo.*

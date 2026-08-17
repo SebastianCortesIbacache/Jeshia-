@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initTicker();
   initCatalog();
+  initCatalogSearch();
   initUniverse();
+  initComparator();
   initQuiz();
   initBoxBuilder();
   initMoodSection();
@@ -19,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCart();
   initGiftDedication();
   initModals();
+  initFloatingWhatsApp();
 });
 
 /* ==========================================================================
@@ -101,9 +104,10 @@ function initTicker() {
 }
 
 /* ==========================================================================
-   4. CATÁLOGO DE PRODUCTOS INTERACTIVO
+   4. CATÁLOGO DE PRODUCTOS INTERACTIVO & BÚSQUEDA EN TIEMPO REAL
    ========================================================================== */
 let currentCategory = 'all';
+let catalogSearchTerm = '';
 
 function initCatalog() {
   const tabs = document.querySelectorAll('.cat-tab');
@@ -119,17 +123,85 @@ function initCatalog() {
   renderProducts();
 }
 
+function initCatalogSearch() {
+  const searchInput = document.getElementById('catalogSearchInput');
+  const clearBtn = document.getElementById('clearSearchBtn');
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      catalogSearchTerm = e.target.value.trim().toLowerCase();
+      if (clearBtn) {
+        clearBtn.style.display = catalogSearchTerm.length > 0 ? 'flex' : 'none';
+      }
+      renderProducts();
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', clearCatalogSearch);
+  }
+}
+
+function clearCatalogSearch() {
+  const searchInput = document.getElementById('catalogSearchInput');
+  const clearBtn = document.getElementById('clearSearchBtn');
+  if (searchInput) searchInput.value = '';
+  if (clearBtn) clearBtn.style.display = 'none';
+  catalogSearchTerm = '';
+  renderProducts();
+}
+
 function renderProducts() {
   const grid = document.getElementById('productsGrid');
+  const noResults = document.getElementById('noSearchResults');
   if (!grid) return;
 
-  const filtered = currentCategory === 'all' 
+  let filtered = currentCategory === 'all' 
     ? PRODUCTS 
     : PRODUCTS.filter(p => p.category === currentCategory);
 
+  // Filtrado por término de búsqueda en tiempo real
+  let matchedFragId = null;
+  if (catalogSearchTerm) {
+    // Buscar si alguna fragancia coincide con el término
+    const matchingFrags = FRAGRANCES.filter(f => {
+      const q = catalogSearchTerm;
+      return f.name.toLowerCase().includes(q) ||
+             f.subtitle.toLowerCase().includes(q) ||
+             f.familyName.toLowerCase().includes(q) ||
+             f.description.toLowerCase().includes(q) ||
+             f.notes.top.toLowerCase().includes(q) ||
+             f.notes.heart.toLowerCase().includes(q) ||
+             f.notes.base.toLowerCase().includes(q) ||
+             f.mood.toLowerCase().includes(q) ||
+             f.space.toLowerCase().includes(q);
+    });
+
+    if (matchingFrags.length > 0) {
+      matchedFragId = matchingFrags[0].id;
+    }
+
+    filtered = filtered.filter(prod => {
+      const matchProd = prod.name.toLowerCase().includes(catalogSearchTerm) ||
+                        prod.tagline.toLowerCase().includes(catalogSearchTerm) ||
+                        prod.categoryName.toLowerCase().includes(catalogSearchTerm);
+      return matchProd || matchingFrags.length > 0;
+    });
+  }
+
+  if (filtered.length === 0) {
+    grid.style.display = 'none';
+    if (noResults) noResults.style.display = 'block';
+    return;
+  }
+
+  grid.style.display = 'grid';
+  if (noResults) noResults.style.display = 'none';
+
   grid.innerHTML = filtered.map(prod => {
+    const selectedFrag = matchedFragId || prod.defaultFragrance;
     const scentOptions = FRAGRANCES.map(f => `
-      <option value="${f.id}" ${f.id === prod.defaultFragrance ? 'selected' : ''}>
+      <option value="${f.id}" ${f.id === selectedFrag ? 'selected' : ''}>
         ${f.icon} ${f.name} (${f.subtitle})
       </option>
     `).join('');
@@ -213,6 +285,93 @@ function renderUniverse() {
       </div>
     `;
   }).join('');
+}
+
+/* ==========================================================================
+   5B. COMPARADOR INTERACTIVO DE AROMAS BOTÁNICOS (LADO A LADO)
+   ========================================================================== */
+function initComparator() {
+  const selectA = document.getElementById('compareFragA');
+  const selectB = document.getElementById('compareFragB');
+  if (!selectA || !selectB) return;
+
+  const optionsA = FRAGRANCES.map(f => `
+    <option value="${f.id}" ${f.id === 'mokka' ? 'selected' : ''}>
+      ${f.icon} ${f.name} (${f.familyName})
+    </option>
+  `).join('');
+
+  const optionsB = FRAGRANCES.map(f => `
+    <option value="${f.id}" ${f.id === 'vainilla-coco' ? 'selected' : ''}>
+      ${f.icon} ${f.name} (${f.familyName})
+    </option>
+  `).join('');
+
+  selectA.innerHTML = optionsA;
+  selectB.innerHTML = optionsB;
+
+  selectA.addEventListener('change', renderComparison);
+  selectB.addEventListener('change', renderComparison);
+
+  renderComparison();
+}
+
+function renderComparison() {
+  const selectA = document.getElementById('compareFragA');
+  const selectB = document.getElementById('compareFragB');
+  const container = document.getElementById('compareCardsGrid');
+  if (!selectA || !selectB || !container) return;
+
+  const fragA = getFragranceById(selectA.value);
+  const fragB = getFragranceById(selectB.value);
+
+  container.innerHTML = `
+    ${renderCompareCard(fragA)}
+    ${renderCompareCard(fragB)}
+  `;
+}
+
+function renderCompareCard(frag) {
+  const homeSprayPrice = PRODUCTS.find(p => p.id === 'home-spray-250')?.price || 12990;
+  return `
+    <div class="compare-card" style="--compare-color: ${frag.color}">
+      <div class="compare-card-header">
+        <div class="compare-art-wrap">
+          <img src="${frag.image}" alt="${frag.name}" loading="lazy">
+        </div>
+        <div class="compare-title-area">
+          <span class="frag-family-tag">${frag.icon} ${frag.familyName}</span>
+          <h3>${frag.name}</h3>
+          <span class="compare-sub">${frag.subtitle}</span>
+        </div>
+      </div>
+
+      <div class="compare-notes-table">
+        <div class="compare-note-row">
+          <b>Salida:</b>
+          <span>${frag.notes.top}</span>
+        </div>
+        <div class="compare-note-row">
+          <b>Corazón:</b>
+          <span>${frag.notes.heart}</span>
+        </div>
+        <div class="compare-note-row">
+          <b>Fondo:</b>
+          <span>${frag.notes.base}</span>
+        </div>
+      </div>
+
+      <div class="compare-meta-pill">
+        <p>✨ <b>Sensación:</b> ${frag.mood}</p>
+        <p>🏠 <b>Espacio ideal:</b> ${frag.space}</p>
+        <p style="margin-top: 6px; font-style: italic; font-size: 0.8rem;">"${frag.description}"</p>
+      </div>
+
+      <button class="btn-primary compare-add-btn" onclick="quickAddFragranceToCart('${frag.id}')">
+        <span>🛒</span> Pedir Home Spray en ${frag.name} (${formatCLP(homeSprayPrice)})
+      </button>
+    </div>
+  `;
 }
 
 /* ==========================================================================
@@ -623,8 +782,8 @@ function initB2BSection() {
 function requestB2BQuote() {
   const slider = document.getElementById('b2bSlider');
   const qty = slider ? slider.value : '50';
-  const message = `🏢 *¡Hola Jeshia! Quisiera solicitar una cotización mayorista/corporativa:*%0A%0A• *Cantidad estimada:* ${qty} unidades%0A• *Uso previsto:* (Regalos corporativos / Hotel / Matrimonio / Tienda)%0A%0A¿Me podrían indicar los tiempos de entrega y catálogo corporativo? ✨`;
-  window.open(`https://wa.me/56912345678?text=${message}`, '_blank');
+  const message = `🏢 *¡Hola Jeshia! Quisiera solicitar una cotización mayorista/corporativa:*\n\n• *Cantidad estimada:* ${qty} unidades\n• *Uso previsto:* (Regalos corporativos / Hotel / Matrimonio / Tienda)\n\n¿Me podrían indicar los tiempos de entrega y catálogo corporativo? ✨`;
+  window.open(`https://wa.me/56912345678?text=${encodeURIComponent(message)}`, '_blank');
 }
 
 /* ==========================================================================
@@ -842,34 +1001,34 @@ function checkoutWhatsApp() {
   const giftFrom = document.getElementById('giftFrom')?.value || '';
   const giftMsg = document.getElementById('giftMsg')?.value || '';
 
-  let message = `🌿 *¡Hola Jeshia! Deseo realizar el siguiente pedido:*%0A%0A`;
+  let message = `🌿 *¡Hola Jeshia! Deseo realizar el siguiente pedido:*\n\n`;
 
   let total = 0;
   cart.forEach((item, i) => {
     const itemTotal = item.price * item.qty;
     total += itemTotal;
-    message += `*${i + 1}. ${item.name} (${item.volume})*%0A`;
-    message += `   • Fragancia: ${item.fragranceName}%0A`;
-    message += `   • Cantidad: ${item.qty} un.%0A`;
-    message += `   • Subtotal: ${formatCLP(itemTotal)}%0A%0A`;
+    message += `*${i + 1}. ${item.name} (${item.volume})*\n`;
+    message += `   • Fragancia: ${item.fragranceName}\n`;
+    message += `   • Cantidad: ${item.qty} un.\n`;
+    message += `   • Subtotal: ${formatCLP(itemTotal)}\n\n`;
   });
 
-  message += `💰 *TOTAL PEDIDO: ${formatCLP(total)}*%0A`;
+  message += `💰 *TOTAL PEDIDO: ${formatCLP(total)}*\n`;
 
   if (isGift && (giftTo || giftMsg)) {
-    message += `%0A🎁 *TARJETA DE REGALO INCLUIDA:*%0A`;
-    if (giftTo) message += `   • Para: ${encodeURIComponent(giftTo)}%0A`;
-    if (giftFrom) message += `   • De: ${encodeURIComponent(giftFrom)}%0A`;
-    if (giftMsg) message += `   • Dedicatoria: "${encodeURIComponent(giftMsg)}"%0A`;
+    message += `\n🎁 *TARJETA DE REGALO INCLUIDA:*\n`;
+    if (giftTo) message += `   • Para: ${giftTo}\n`;
+    if (giftFrom) message += `   • De: ${giftFrom}\n`;
+    if (giftMsg) message += `   • Dedicatoria: "${giftMsg}"\n`;
   }
 
   if (notes.trim()) {
-    message += `%0A📝 *Notas de envío:* ${encodeURIComponent(notes.trim())}%0A`;
+    message += `\n📝 *Notas de envío:* ${notes.trim()}\n`;
   }
 
-  message += `%0A¿Me podrían indicar los datos de transferencia y coordinar el envío? ¡Muchas gracias! ✨`;
+  message += `\n¿Me podrían indicar los datos de transferencia y coordinar el envío? ¡Muchas gracias! ✨`;
 
-  const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
+  const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
   window.open(whatsappUrl, '_blank');
 }
 
@@ -894,46 +1053,69 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-function openFragranceModal(fragranceId) {
+let selectedFragranceFormat = 'home-spray-250';
+
+function openFragranceModal(fragranceId, preselectedFormatId = 'home-spray-250') {
+  selectedFragranceFormat = preselectedFormatId;
   const frag = getFragranceById(fragranceId);
   const modalContent = document.getElementById('modalBody');
   const overlay = document.getElementById('modalOverlay');
 
   if (!modalContent || !overlay) return;
 
+  const currentProd = getProductById(selectedFragranceFormat) || PRODUCTS[0];
+
+  const formatButtons = PRODUCTS.map(p => `
+    <button class="format-option-btn ${p.id === selectedFragranceFormat ? 'active' : ''}" 
+            onclick="updateFragModalFormat('${frag.id}', '${p.id}')">
+      <span class="format-opt-title">${p.categoryName} (${p.volume})</span>
+      <span class="format-opt-price">${formatCLP(p.price)}</span>
+    </button>
+  `).join('');
+
   modalContent.innerHTML = `
     <div class="modal-grid">
-      <div class="modal-img-wrap">
+      <div class="modal-img-wrap" style="position: relative;">
         <img src="${frag.image}" alt="${frag.name}" style="max-width: 80%; max-height: 80%; object-fit: contain;">
+        <div style="position: absolute; bottom: 16px; left: 16px; background: rgba(255,255,255,0.95); padding: 6px 12px; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700; color: var(--brand-forest-dark); box-shadow: var(--shadow-sm);">
+          ${frag.icon} ${frag.name}
+        </div>
       </div>
       <div class="modal-content">
         <span class="card-volume">${frag.icon} ${frag.familyName}</span>
         <h2 class="font-serif" style="font-size: 2rem; color: var(--brand-forest-dark); margin-bottom: 4px;">
           ${frag.name}
         </h2>
-        <p style="font-size: 0.92rem; color: var(--brand-terracotta); font-weight: 600; margin-bottom: 16px;">
+        <p style="font-size: 0.92rem; color: var(--brand-terracotta); font-weight: 600; margin-bottom: 12px;">
           ${frag.subtitle}
         </p>
-        <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">
+        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 18px;">
           ${frag.description}
         </p>
 
-        <div style="background: var(--bg-main); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--brand-line); margin-bottom: 24px;">
-          <h4 style="font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--brand-forest-dark); margin-bottom: 10px;">
-            ✦ Pirámide Olfativa
-          </h4>
-          <p style="font-size: 0.84rem; margin-bottom: 4px;"><b>Salida:</b> ${frag.notes.top}</p>
-          <p style="font-size: 0.84rem; margin-bottom: 4px;"><b>Corazón:</b> ${frag.notes.heart}</p>
-          <p style="font-size: 0.84rem;"><b>Fondo:</b> ${frag.notes.base}</p>
+        <!-- Selector de Formato de Producto -->
+        <div class="modal-format-picker">
+          <label class="modal-format-label">1. Elige tu Formato de Envase:</label>
+          <div class="modal-formats-grid">
+            ${formatButtons}
+          </div>
         </div>
 
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px;">
-          🏠 <b>Ambiente ideal:</b> ${frag.space}<br>
-          ✨ <b>Sensación:</b> ${frag.mood}
+        <div style="background: var(--bg-main); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--brand-line); margin-bottom: 20px;">
+          <h4 style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand-forest-dark); margin-bottom: 8px;">
+            ✦ Pirámide Olfativa
+          </h4>
+          <p style="font-size: 0.82rem; margin-bottom: 3px;"><b>Salida:</b> ${frag.notes.top}</p>
+          <p style="font-size: 0.82rem; margin-bottom: 3px;"><b>Corazón:</b> ${frag.notes.heart}</p>
+          <p style="font-size: 0.82rem;"><b>Fondo:</b> ${frag.notes.base}</p>
+        </div>
+
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">
+          🏠 <b>Espacio ideal:</b> ${frag.space} · ✨ <b>Sensación:</b> ${frag.mood}
         </p>
 
-        <button class="btn-primary" onclick="quickAddFragranceToCart('${frag.id}'); closeModal();" style="width: 100%;">
-          🛒 Pedir Home Spray en ${frag.name} (${formatCLP(PRODUCTS.find(p => p.id === 'home-spray-250')?.price || 12990)})
+        <button class="btn-primary" onclick="addToCart('${currentProd.id}', '${frag.id}', 1); closeModal();" style="width: 100%;">
+          🛒 Añadir ${currentProd.categoryName} en ${frag.name} (${formatCLP(currentProd.price)})
         </button>
       </div>
     </div>
@@ -941,6 +1123,10 @@ function openFragranceModal(fragranceId) {
 
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+function updateFragModalFormat(fragranceId, formatId) {
+  openFragranceModal(fragranceId, formatId);
 }
 
 function openProductQuickView(productId, specificFragranceId = null) {
@@ -954,7 +1140,6 @@ function openProductQuickView(productId, specificFragranceId = null) {
 
   if (!modalContent || !overlay) return;
 
-  const featuresList = prod.features.map(f => `<li>✓ ${f}</li>`).join('');
   const scentOptions = FRAGRANCES.map(f => `
     <option value="${f.id}" ${f.id === frag.id ? 'selected' : ''}>
       ${f.icon} ${f.name} (${f.subtitle})
@@ -1011,7 +1196,32 @@ function openProductQuickView(productId, specificFragranceId = null) {
 }
 
 /* ==========================================================================
-   14. NOTIFICACIONES TOAST
+   14. WIDGET FLOTANTE DE ASESORÍA BOTÁNICA WHATSAPP
+   ========================================================================== */
+function initFloatingWhatsApp() {
+  const tooltip = document.getElementById('whatsappTooltip');
+  const closeBtn = document.getElementById('closeWhatsappTooltip');
+
+  // Mostrar tooltip tras 3.5 segundos de navegación
+  setTimeout(() => {
+    const isDismissed = sessionStorage.getItem('jeshia_wa_tooltip_dismissed');
+    if (!isDismissed && tooltip) {
+      tooltip.classList.add('show');
+    }
+  }, 3500);
+
+  if (closeBtn && tooltip) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      tooltip.classList.remove('show');
+      sessionStorage.setItem('jeshia_wa_tooltip_dismissed', 'true');
+    });
+  }
+}
+
+/* ==========================================================================
+   15. NOTIFICACIONES TOAST
    ========================================================================== */
 function showToast(message) {
   let toast = document.getElementById('siteToast');
